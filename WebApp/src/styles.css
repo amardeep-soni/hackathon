@@ -22,7 +22,11 @@
     margin: 0;
     font-family: 'Arial', sans-serif;
     transition: background-color 0.3s, color 0.3s;
-  }
+    -webkit-transition: background-color 0.3s, color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s;
+    -ms-transition: background-color 0.3s, color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s;
+}
   
   body.light-mode {
     background-color: var(--bg-color-light);
@@ -33,3 +37,33 @@
     background-color: var(--bg-color-dark);
     color: var(--text-color-dark);
   }
+
+  
+.cards{
+  perspective: 1000px;
+}
+.card {
+transition: 0.3s linear;
+transform: translateZ(0px);
+border: 1px solid rgba(100, 100, 100, 0.425);
+box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.15);
+-webkit-transition: 0.3s linear;
+-moz-transition: 0.3s linear;
+-ms-transition: 0.3s linear;
+-o-transition: 0.3s linear;
+-webkit-transform: translateZ(50px);
+-moz-transform: translateZ(50px);
+-ms-transform: translateZ(50px);
+-o-transform: translateZ(50px);
+}
+.card:hover {
+box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.24);
+transform: translateZ(60px);
+-webkit-transform: translateZ(60px);
+-moz-transform: translateZ(60px);
+-ms-transform: translateZ(60px);
+-o-transform: translateZ(60px);
+}
+.card p {
+margin: 0;
+}

@@ -1,8 +1,36 @@
-.backgroundImg{
-    height:30vh;
-    width: 100%;
-    background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2ViJTIwc2NyYXBpbmd8ZW58MHx8MHx8fDA%3D');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.backgroundImg {
+  height: 30vh;
+  width: 100%;
+  background-image: url("https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2ViJTIwc2NyYXBpbmd8ZW58MHx8MHx8fDA%3D");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.cards{
+    perspective: 1000px;
+}
+.card {
+  transition: 0.3s linear;
+  transform: translateZ(0px);
+  border: 1px solid rgba(100, 100, 100, 0.425);
+  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.15);
+  -webkit-transition: 0.3s linear;
+  -moz-transition: 0.3s linear;
+  -ms-transition: 0.3s linear;
+  -o-transition: 0.3s linear;
+  -webkit-transform: translateZ(50px);
+  -moz-transform: translateZ(50px);
+  -ms-transform: translateZ(50px);
+  -o-transform: translateZ(50px);
+}
+.card:hover {
+  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.24);
+  transform: translateZ(60px);
+  -webkit-transform: translateZ(60px);
+  -moz-transform: translateZ(60px);
+  -ms-transform: translateZ(60px);
+  -o-transform: translateZ(60px);
+}
+.card p {
+  margin: 0;
 }

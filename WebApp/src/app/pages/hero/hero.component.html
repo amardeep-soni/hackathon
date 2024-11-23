@@ -1,18 +1,31 @@
 <div class="landingSection"></div>
 <div class="cardSection">
   <div class="cards p-3 d-flex gap-2 justify-content-center" >
-    <div class="card" style="width: 18rem; cursor:pointer;" (click)="onCardClick(1)">
+   
+    <div
+      class="card p-2"
+      style="width: 18rem; cursor: pointer; height: 22rem; margin:3rem;"
+      (click)="onCardClick(1)"
+    >
       <img
-        class="card-img-top"
+        class="card-img-top h-50 rounded-4"
         src="https://s3.us-west-1.amazonaws.com/idtech-2018-media-prd/listing_university_washington_32c75dfd8a.jpg"
         alt="Card image cap"
       />
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p> 
+        <div class="col">
+          <h5 class="card-title">BattleBots® Camp Junior</h5>
+        </div>
+        <div class="col">
+          <div class="row-6">
+            <p>Ages: 6-7</p>
+          </div>
+          <div class="row-6">
+            <p>Male</p>
+            <p>Price:- $45</p>
+            <p>Category:- <i class="fa-solid fa-venus"></i> female</p>
+          </div>
+        </div>
       </div>
     </div>  
   </div>

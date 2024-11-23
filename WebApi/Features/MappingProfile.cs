@@ -7,7 +7,7 @@ namespace WebApi.Fetatures
 	{
 		public MappingProfile()
 		{
-			CreateMap<CampsDto, Camp>()
+			CreateMap<CampsDto, CampStagging>()
 			.ForMember(dest => dest.ActivitiesOffered,
 				opt => opt.MapFrom(src => string.Join("@#", src.ActivitiesOffered)))
 			.ForMember(dest => dest.TestimonialsOrReviews,

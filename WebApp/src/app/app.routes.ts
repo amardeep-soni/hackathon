@@ -18,10 +18,6 @@ export const routes: Routes = [
     component: AboutComponent,
   },
   {
-    path: 'contact',
-    component: AboutComponent,
-  },
-  {
     path: 'camps/:id',
     component: CampDetailsComponent,
   },

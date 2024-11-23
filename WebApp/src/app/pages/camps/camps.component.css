@@ -5,29 +5,47 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-} 
+}
+
 .card {
   transition: 0.3s linear;
   transform: translateZ(0px);
   border: 1px solid rgba(100, 100, 100, 0.425);
   box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.15);
-  -webkit-transition: 0.3s linear;
-  -moz-transition: 0.3s linear;
-  -ms-transition: 0.3s linear;
-  -o-transition: 0.3s linear;
-  -webkit-transform: translateZ(50px);
-  -moz-transform: translateZ(50px);
-  -ms-transform: translateZ(50px);
-  -o-transform: translateZ(50px);
 }
+
 .card:hover {
   box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.24);
   transform: translateY(-5px);
-  -webkit-transform: translateY(-5px);
-  -moz-transform: translateY(-5px);
-  -ms-transform: translateY(-5px);
-  -o-transform: translateY(-5px);
 }
+
 .card p {
   margin: 0;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .col-lg-3 {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-md-4 {
+    width: 100%;
+  }
+
+  .backgroundImg {
+    height: 40vh;
+  }
+}
+
+@media (max-width: 576px) {
+  .col-sm-6 {
+    width: 100%;
+  }
+
+  .backgroundImg {
+    height: 45vh;
+  }
 }

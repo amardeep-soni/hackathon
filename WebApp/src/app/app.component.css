@@ -1,0 +1,23 @@
+.scroll-to-top-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 24px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scroll-to-top-icon:hover {
+  background-color: #0056b3;
+}
+
+.scroll-to-top-icon i {
+  pointer-events: none; /* Ensures the icon does not interfere with the click event */
+}

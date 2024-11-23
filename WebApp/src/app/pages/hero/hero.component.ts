@@ -22,6 +22,7 @@ export class HeroComponent {
   router = inject(Router);
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     // this._campsService.getAll().subscribe((data) => {
     //   // this.camps = data;
     //   console.log(this.camps);

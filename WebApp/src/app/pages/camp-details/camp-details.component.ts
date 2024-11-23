@@ -18,7 +18,7 @@ export class CampDetailsComponent {
   route = inject(ActivatedRoute);
   constructor(private _campsService: CampsServiceProxy) {}
   camp: CampsDto;
-  ngOnInit() { 
+  ngOnInit() {    window.scrollTo(0, 0);
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     // console.log(this.id);
     this._campsService.getById(this.id).subscribe((data: any) => {

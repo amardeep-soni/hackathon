@@ -28,6 +28,7 @@ export class CampsComponent implements OnInit {
   // camps: Camp[] = [];
 camps=[]
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     // this._campsService.getAll().subscribe((data) => {
     //   this.camps = data;
     //   console.log(this.camps)
@@ -164,7 +165,7 @@ camps=[]
           "imageLink": "https://s3.us-west-1.amazonaws.com/idtech-2018-media-prd/header_carousel1_min1_d26f07873f.jpg"
       }
   ]
-  
+
   }
   router= inject(Router)
   first: number = 0;

@@ -1,82 +1,54 @@
 <div class="backgroundImg"></div>
 
 <div class="text-center text-capitalize pt-4">
-  <h1>get our all the camps</h1>
+  <h1>Get all the camps</h1>
 </div>
-<div class="row" style="margin-left: 0 !important; margin-right: 0 !important;">
-  @for (camp of camps; track camp.id) {
-  <div class="col-4 d-flex justify-content-center py-3 flex-wrap gap-3 my-3">
-    <div class="card p-2 rounded-4" style="width: 22rem; cursor: pointer; margin-top: 1rem; " (click)="onCardClick(camp.id)">
-      <img class="card-img-top rounded-4" [src]="camp.imageLink" alt="Card image cap" />
-      <div class="card-body">
-        <div class="col">
-          <h5 class="card-title">{{ camp.campName }}</h5>
-        </div>
-        <div class="col">
-          <div class="row-6">
-            <p>Ages:- {{ camp.ageGroup }}</p>
+
+<div class="container-fluid">
+  <div
+    class="row"
+    style="margin-left: 0 !important; margin-right: 0 !important"
+  >
+    <!-- Loop through camps and create a responsive card layout -->
+    @for (camp of camps; track camp.id){
+    <div
+      class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center py-3 flex-wrap gap-3 my-3"
+    >
+      <div
+        class="card p-2 rounded-4"
+        style="width: 100%; cursor: pointer; margin-top: 1rem"
+        (click)="onCardClick(camp.id)"
+      >
+        <img
+          class="card-img-top rounded-4"
+          [src]="camp.imageLink"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <div class="col">
+            <h5 class="card-title">{{ camp.campName }}</h5>
           </div>
-          <div class="row-6">
-            <p>Gender:- {{ camp.gender }}</p>
-            <p>Price:- {{ camp.price }}</p>
-            <p>
-              Category:- @if(camp.category=='female'){
-
-              <i class="fa-solid fa-venus"></i> {{ camp.category }}
-              }@else if (camp.category =='male') {
-              <i class="fa-solid fa-venus"></i> {{ camp.category }}
-
-              }@else{
-              {{ camp.category }}
-              }
-            </p>
+          <div class="col">
+            <div class="row-6">
+              <p>Ages: {{ camp.ageGroup }}</p>
+            </div>
+            <div class="row-6">
+              <p>Gender: {{ camp.gender }}</p>
+              <p>Price: {{ camp.price }}</p>
+              <p>
+                Category: @if(camp.category=='female'){
+                <i class="fa-solid fa-venus"></i> {{ camp.category }}
+                } @else if (camp.category == 'male') {
+                <i class="fa-solid fa-mars"></i> {{ camp.category }}
+                } @else {
+                {{ camp.category }}
+                }
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    }
   </div>
-  }
-</div>
-<!-- 
-{
-    "id": 2,
-    "campName": "Tech Innovators Camp",
-    "address": "456 Silicon Valley, Tech City, USA",
-    "email": "contact@techinnovators.com",
-    "phone": "987-654-3210",
-    "activitiesOffered": "Coding@#Robotics@#3D Printing@#Game Design",
-    "datesAndDurations": "August 1 - August 14",
-    "ageGroup": "10-16 years",
-    "costsAndScholarships": "Standard: $800/week, Limited Scholarships Available",
-    "testimonialsOrReviews": "Great learning experience! - Alex K.@#My child built their first robot. - Jamie R.",
-    "classSchedule": "Morning Coding Workshop@#Afternoon Robotics@#Evening Game Design",
-    "gender": "Co-ed",
-    "price": "$800 per week",
-    "startDate": "2024-08-01",
-    "endDate": "2024-08-14",
-    "capacity": "30 campers",
-    "registrationDeadline": "2024-07-15",
-    "spotsAvailable": "10",
-    "highlights": "Cutting-edge Technology, Hands-on Projects, Expert Mentors",
-    "language": "English",
-    "category": "Technology",
-    "hostedBy": "deep",
-    "campLink": "http://techinnovatorscamp.com"
-}
-    for cards
-    
-    camp name
-    age group
-    gender
-    price
-    category
-
-<div class="card flex justify-content-center">
-  <p-paginator
-    (onPageChange)="onPageChange($event)"
-    [first]="first"
-    [rows]="rows"
-    [totalRecords]="120"
-    [rowsPerPageOptions]="[10, 20, 30]"
-  />
-</div> -->
+</div> 

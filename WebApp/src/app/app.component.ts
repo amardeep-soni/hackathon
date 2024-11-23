@@ -4,6 +4,10 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { HeaderComponent } from './components/header/header.component';
 
+import { register } from 'swiper/element/bundle';
+// register Swiper custom elements
+register();
+
 @Component({
   selector: 'app-root',
   standalone: true,

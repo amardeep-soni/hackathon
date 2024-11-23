@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [],
   templateUrl: './hero.component.html',
-  styleUrl: './hero.component.css'
+  styleUrl: './hero.component.css', 
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HeroComponent {
   router=inject(Router)

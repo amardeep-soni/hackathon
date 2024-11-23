@@ -86,18 +86,17 @@
   /* Slightly transparent white on hover */
 }
 
-.img{
+.img {
   position: relative;
 }
-.img img{
+.img img {
   border-radius: 18px;
   -webkit-border-radius: 18px;
   -moz-border-radius: 18px;
   -ms-border-radius: 18px;
   -o-border-radius: 18px;
-
 }
-.img::after{
+.img::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -105,13 +104,76 @@
   background-color: #007aff;
   bottom: -14px;
   left: -14px;
-  opacity: .5;
-  transition: .3s linear;
-  -webkit-transition: .3s linear;
+  opacity: 0.5;
+  transition: 0.3s linear;
+  -webkit-transition: 0.3s linear;
   z-index: -1;
   border-radius: 18px;
   -webkit-border-radius: 18px;
   -moz-border-radius: 18px;
   -ms-border-radius: 18px;
   -o-border-radius: 18px;
+}
+.aboutSection {
+  height: 80vh;
+  background-color: rgb(237, 237, 237);
+  padding: 5rem 0;
+}
+.inner {
+  background-image: url("https://images.cdn-files-a.com/ready_uploads/media/17963/2000_5cdb9b24469d5.jpg");
+  height: 25rem;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  border-radius: 15px;
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  -ms-border-radius: 15;
+  -o-border-radius: 15;
+}
+.aboutus {
+  position: absolute;
+  width: 27rem;
+  background: white;
+  left: 2rem;
+  bottom: -30px;
+  padding: 41px 25px;
+  border-radius: 15px;
+}
+.choose {
+  height: 70vh;
+  display: flex;
+  padding: 0 5rem;
+}
+.choose .right {
+  height: 100%;
+  background-image: url("https://images.cdn-files-a.com/ready_uploads/media/17951/2000_5cdb9affb9167.jpg");
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.serviceSection {
+  padding: 5rem;
+}
+.serviceSection .card {
+  border-bottom: 4px solid #ff0000;
+}
+.testimoinials .heading {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+.testimoinials .testimonialsCards {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+.testimonialsCards swiper-slide {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  width: 60% !important;
 }

@@ -37,11 +37,9 @@ def scrape_course_details(course_url):
     response = requests.get(course_url)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
-
         # Extracting course title
         title_tag = soup.find('h1', class_='text-undefined title px-2')
         CampName = title_tag.find('span', class_='undefined').text.strip() if title_tag else "N/A"
-
         # Scraping details from the list
         details_list = soup.find('ul', class_='list-unstyled')
 
@@ -67,11 +65,14 @@ def scrape_course_details(course_url):
         # Find the 'article' tag inside the desired section
         article_tag = soup.find('div', class_='block generic-content').find('article')
         highlights = article_tag.text.strip() if article_tag else "No description found"
+      
         
-         # Extract class schedule
-        schedule_tag = soup.find('h2', string=lambda x: 'schedule' in (x or '').lower())
-        classChedules = schedule_tag.text.strip() if schedule_tag else "Schedule not found"
-
+        
+                # Find the first 'h2' inside the 'content' class
+        class_schedule = soup.find('div', class_='content').find('h2').get_text()
+        print(class_schedule)
+        
+        
         # Extract "You'll learn to" "ActivitiesOffered": activities_offered,
 
         learn_to_section = soup.select_one('.static-component .block.generic-content ul')
@@ -114,7 +115,7 @@ def scrape_course_details(course_url):
             **course_details,
             "Phone": phone,
             "Highlights": highlights,
-            "ClassSchedule": classChedules,
+            "ClassSchedule": "not available",
             "ActivitiesOffered": activities_offered,
             "TestimonialsOrReviews": testimonialsOrReviews,
             "Language": "English",  # Added Language
@@ -129,7 +130,12 @@ def scrape_course_details(course_url):
             "SpotsAvailable":"not available",
             "ImageLink":image_url,
             "AgeGroup": "8-14 years",
-            "Email":email
+            "Email":email,
+            "HostedBy":"IdTech",
+            "Category":"Tech Camp"
+            
+            
+            
         }
     else:
         return {
@@ -138,7 +144,7 @@ def scrape_course_details(course_url):
         }
 
 # Flask route for main page and nested scraping
-@app.route('/api/nested-course-links', methods=['GET'])
+@app.route('/api/idtech', methods=['GET'])
 def get_nested_course_links():
     course_links = scrape_course_links()
     nested_details = [scrape_course_details(link) for link in course_links]

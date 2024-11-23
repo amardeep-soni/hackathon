@@ -49,3 +49,8 @@
     height: 45vh;
   }
 }
+
+::ng-deep.p-progress-spinner {
+  width: 150px !important;
+  height: 150px !important;
+}

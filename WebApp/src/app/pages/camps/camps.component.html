@@ -5,6 +5,8 @@
 </div>
 
 <div class="container-fluid">
+  @if (!loading) {
+
   <div
     class="row"
     style="margin-left: 0 !important; margin-right: 0 !important"
@@ -23,6 +25,9 @@
           class="card-img-top rounded-4"
           [src]="camp.imageLink"
           alt="Card image cap"
+          style="
+          height: 12rem;
+          object-fit: cover;"
         />
         <div class="card-body">
           <div class="col">
@@ -51,4 +56,10 @@
     </div>
     }
   </div>
-</div> 
+
+}@else{
+  <div class=" d-flex align-items-center justify-content-center w-100" style="height: 60vh;" role="status">
+    <p-progressSpinner ariaLabel="loading" />
+  </div>
+}
+</div>

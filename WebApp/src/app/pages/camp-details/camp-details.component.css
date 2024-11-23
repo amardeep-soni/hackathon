@@ -1,8 +1,7 @@
 .container {
   padding: 32px;
   display: flex;
-  flex-direction: column;
-  gap: 32px;
+  flex-direction: column; 
   max-width: 1200px;
 }
 
@@ -10,6 +9,7 @@
   display: flex;
   gap: 32px;
   width: 100%;
+  margin-bottom: 32px;
 }
 
 .campImg {
@@ -20,8 +20,12 @@
   width: 100%;
   height: 400px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
 }
 
 .campDetails {
@@ -53,8 +57,7 @@
 }
 
 .aboutCamp {
-  width: 100%;
-  padding: 32px 0;
+  width: 100%; 
 }
 
 .aboutCamp>div:nth-child(1) {
@@ -75,12 +78,7 @@
   font-weight: 600;
   margin-bottom: 24px;
 }
-
-.activities,
-.classSchedule,
-.datesDuration {
-  margin-bottom: 32px;
-}
+ 
 
 .activities h3,
 .classSchedule h3,
@@ -108,10 +106,12 @@
 
 .startEnd {
   margin: 32px 0;
-  padding: 24px;
+  display: flex;
+  padding: 24px 10px;
   background: linear-gradient(145deg, #ffffff, #f8f9fa);
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  justify-content: end;
 }
 
 .time-block {
@@ -130,7 +130,7 @@
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  flex: 1;
+ 
 }
 
 .time-card:hover {
@@ -187,14 +187,13 @@
   padding: 0 8px;
 }
 
-.contactInfo {
+.contactInfo {    width: 85%;
   background-color: #f8f9fa;
   border-radius: 12px;
-  padding: 24px;
-  padding-left: 30px;
+  padding: 24px 10px;
+  padding-left: 25px;
   margin-bottom: 32px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
   transition: .3s linear;
   -webkit-transition: .3s linear;
   -moz-transition: .3s linear;

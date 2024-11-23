@@ -5,12 +5,10 @@ from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
-# Base URL for full links
-BASE_URL = "https://www.idtech.com"
-
 # Function to scrape links from the main page
 def scrape_course_links():
-    url = f"{BASE_URL}/courses"
+    base_url = "https://www.idtech.com"
+    url = f"{base_url}/courses"
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -23,7 +21,8 @@ def scrape_course_links():
             link_tag = course.find('a', href=True)
             if link_tag:
                 # Append full link
-                full_link = BASE_URL + link_tag['href']
+                
+                full_link = base_url + link_tag['href']
                 course_links.append(full_link)
 
         # Return only the first 4 links

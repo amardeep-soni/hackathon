@@ -150,7 +150,8 @@ def scrape_amplify_main():
         email = email_tag['href'].replace('mailto:', '') if email_tag else "N/A"
         testimonials = [review.get_text(strip=True) for review in soup.find_all('h3', class_='slider__title')]
         image_tag = soup.find('div', class_='image-background').find('img') if soup.find('div', class_='image-background') else None
-        image_url = image_tag['src'] if image_tag else "Image URL not found"
+        image_url = image_tag['src'] if image_tag else "Image URL not found",
+        highlights = soup.find('div', class_='tabcont__paragraph').get_text(strip=True) if soup.find('div', class_='tabcont__paragraph') else "N/A"
 
         return {
             "CampName": camp_name,
@@ -159,6 +160,8 @@ def scrape_amplify_main():
             "Phone": phone,
             "TestimonialsOrReviews": testimonials,
             "ImageLink": image_url,
+            "Highlights": highlights,
+            
         }
     else:
         return {}
@@ -207,7 +210,6 @@ def get_amplify_rocks_data():
         "CostsAndScholarships": "Available",
         "ClassSchedule": ["Morning Session", "Afternoon Activities"],
         "Gender": "Female",
-        "Highlights": "Outdoor Activities and Fun",
         "Language": "English",
         "Category": "Outdoor Adventure",
         "CampLink": BASE_URL,

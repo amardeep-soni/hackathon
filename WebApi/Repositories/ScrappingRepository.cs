@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using WebApi.Entities;
 using WebApi.Features;
@@ -11,6 +12,7 @@ namespace WebApi.Repositories
 			var urls = new List<string> { "https://test-flask-six-sigma.vercel.app/api/courses"};  // URL of your Flask API
 			using (HttpClient client = new HttpClient())
 			{
+				await _dbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Camps");
 				foreach (var url in urls)
 				{
 

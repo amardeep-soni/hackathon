@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Entities;
+using WebApi.Features;
 using WebApi.Repositories;
 
 namespace WebApi.Controllers
@@ -13,13 +14,13 @@ namespace WebApi.Controllers
 		public async Task<ActionResult<List<Camp>>> GetAll()
 		{
 			var camps = await _campsRepo.GetAll();
-			return camps;
+			return Ok(camps);
 		}
 		[HttpGet("GetById")]
-		public async Task<ActionResult<Camp>> GetById(int id)
+		public async Task<ActionResult<CampsDto>> GetById(int id)
 		{
 			var camp = await _campsRepo.GetById(id);
-			return camp;
+			return Ok(camp);
 		}
 
 		[HttpPost("Create")]

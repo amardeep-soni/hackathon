@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using WebApi.Entities;
+using WebApi.Features;
 
 namespace WebApi.Repositories
 {
-	public class CampsRepository(CampsDbContext _dbContext, ScrappingRepository _scrappingRepository)
+	public class CampsRepository(CampsDbContext _dbContext, ScrappingRepository _scrappingRepository, IMapper _mapper)
 	{
 		public async Task<List<Camp>> GetAll()
 		{
@@ -11,10 +13,11 @@ namespace WebApi.Repositories
 			return camps;
 		}
 		
-		public async Task<Camp> GetById(int id)
+		public async Task<CampsDto> GetById(int id)
 		{
 			var camp = await _dbContext.Camps.FirstOrDefaultAsync(c => c.Id == id);
-			return camp;
+			var campDto = _mapper.Map<CampsDto>(camp);
+			return campDto;
 		}
 		
 		public async Task Create()

@@ -25,6 +25,8 @@
 		public string Category { get; set; }
 		public string HostedBy { get; set; }
 		public string CampLink { get; set; }
+		public string ImageLink { get; set; }
+
 	}
 
 }

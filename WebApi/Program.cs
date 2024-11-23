@@ -59,12 +59,12 @@ try
 	var app = builder.Build();
 
 	// Configure the HTTP request pipeline.
-	if (app.Environment.IsDevelopment())
-	{
+	//if (app.Environment.IsDevelopment())
+	//{
 		// Swagger UI only in development
 		app.UseSwagger();
 		app.UseSwaggerUI();
-	}
+	//}
 
 	// Enforce HTTPS redirection
 	app.UseHttpsRedirection();

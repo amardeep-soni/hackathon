@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hero',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './hero.component.css'
 })
 export class HeroComponent {
-
+  router=inject(Router)
+  onViewMore(){
+    this.router.navigate(['/camps'])
+  }
+  onCardClick(id:number){
+    this.router.navigate(['camps', id])
+  }
 }

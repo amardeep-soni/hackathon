@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Your Summer Camp Finder</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero {
+            background-image: url('https://picsum.photos/200/300'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            height: 350px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .about-section {
+            padding: 50px 0;
+            background-color: #fff;
+        }
+
+        .about-section img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .card-custom {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .card-custom img {
+            border-radius: 8px 8px 0 0;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-custom .card-body {
+            padding: 20px;
+        }
+
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .team-member h5 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .team-member p {
+            color: #777;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        /* Custom Media Queries for responsiveness */
+        @media (max-width: 768px) {
+            .hero {
+                height: 250px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>Your Summer Camp Finder</h1>
+            <p>Helping you find the best summer camps for kids and families</p>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero"></div>
+
+    <!-- About Us Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">Welcome to Your Summer Camp Finder!</h2>
+            <p class="section-text">
+                At <strong>Your Summer Camp Finder</strong>, our mission is simple: to help you discover the best summer camps for your kids. Whether you're looking for an outdoor adventure, a creative retreat, or a specialized program, we’ve got something for everyone.
+            </p>
+            <p class="section-text">
+                We gather and showcase top summer camps from across the web, saving you hours of searching. Our platform gives you all the information you need to make the best decision for your child. From stunning wilderness experiences to family-friendly options, we’re here to help you find the perfect summer camp for your family.
+            </p>
+        </div>
+    </section>
+
+    <!-- What We Do Section -->
+    <section class="about-section bg-light">
+        <div class="container">
+            <h2 class="section-title">What We Do</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="section-text">
+                        We curate a wide variety of camps—whether it’s hiking, arts, or sports, our platform makes it easy to find the right camp for your child’s interests. From remote nature camps to creative workshops, we cover it all.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p class="section-text">
+                        Our platform also features family-friendly camps where parents can join the adventure and bond with their children. We provide all the details you need to book the perfect summer experience, including reviews, camp schedules, and more.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-custom">
+                        <img src="https://picsum.photos/200/300" alt="Curated Selection" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Curated Selection</h5>
+                            <p class="card-text">We gather the best camps from trusted sources to save you time and energy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom">
+                        <img src="https://picsum.photos/200/300" alt="Variety of Camps" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Variety of Camps</h5>
+                            <p class="card-text">Whether it's art, sports, or outdoor adventures, we have something for every child.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom">
+                        <img src="https://picsum.photos/200/300" alt="Family Friendly" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Family Friendly</h5>
+                            <p class="card-text">We offer family-friendly options for those who want to camp together.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet the Team Section -->
+    <section class="about-section bg-light">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="row">
+                <div class="col-md-4 team-member">
+                    <img src="https://picsum.photos/200/300" alt="Team Member 1">
+                    <h5>John Doe</h5>
+                    <p>Founder & CEO</p>
+                </div>
+                <div class="col-md-4 team-member">
+                    <img src="https://picsum.photos/200/300" alt="Team Member 2">
+                    <h5>Jane Smith</h5>
+                    <p>Operations Manager</p>
+                </div>
+                <div class="col-md-4 team-member">
+                    <img src="https://picsum.photos/200/300" alt="Team Member 3">
+                    <h5>Alex Brown</h5>
+                    <p>Content Director</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Your Summer Camp Finder. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

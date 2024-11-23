@@ -68,31 +68,67 @@ def scrape_course_details(course_url):
         testimonialsOrReviews = [review.find('div', class_='text').text.strip() for review in testimonialsOrReviews_sections if review.find('div', class_='text')]
 
         course_details = {
-            "CampLink": course_url,
-            "CampName": CampName,
-            "Phone": phone,
-            "Highlights": highlights,
-            "ClassSchedule": class_schedule,
-            "ActivitiesOffered": activities_offered,
-            "TestimonialsOrReviews": testimonialsOrReviews,
-            "Language": "English",
-            "RegistrationDeadline": "not available",
-            "Capacity": "not available",
-            "SpotsAvailable": "not available",
-            "Gender": "Both",
-            "CostsAndScholarships": "not available",
-            "Address": "not available",
-            "StartDate": "not available",
-            "EndDate": "not available",
-            "ImageLink": image_url,
-            "AgeGroup": "8-14 years",
-            "Email": email,
-            "HostedBy": "IdTech",
-            "Category": "Tech Camp"
+            "Price": "N/A",
+            "AgeGroup": "N/A",  # Change "Age" to "AgeGroup"
+            "DatesAndDurations": [],  # Change "Duration" to "DatesAndDurations" and initialize as an empty list
         }
-        return course_details
+
+        if details_list:
+            for li in details_list.find_all('li', class_='pb-1'):
+                strong_tag = li.find('strong')
+                if strong_tag:
+                    key = strong_tag.text.strip().replace(":", "")
+                    value = li.text.strip().replace(strong_tag.text.strip(), "").strip()
+
+                    # Check if the key matches "Age" and change it to "AgeGroup"
+                    if key == "Age":
+                        key = "AgeGroup"
+                    
+                    # Check if the key matches "Duration" and change it to "DatesAndDurations"
+                    if key == "Duration":
+                        key = "DatesAndDurations"
+
+                    if key in course_details:
+                        # If the key is "DatesAndDurations", split the value into a list
+                        if key == "DatesAndDurations":
+                            # Split based on commas or other delimiters if necessary
+                            course_details[key] = [value]
+
+                        else:
+                            # For other keys, just assign the value directly
+                            course_details[key] = value
+
+
+            return {
+                "CampLink": course_url,
+                "CampName": CampName,
+                **course_details,
+                "Phone": phone,
+                "Highlights": highlights,
+                "ClassSchedule": [],
+                "ActivitiesOffered": activities_offered,
+                "TestimonialsOrReviews": testimonialsOrReviews,
+                "Language": "English",  # Added Language
+                "RegistrationDeadline": "not available",  # Added Registration Deadline
+                "Capacity": "not available",  # Added Capacity
+                "SpotsAvailable": "not available",  # Added Spots Available
+                "Gender":"Both",
+                "CostsAndScholarships":"not available",
+                "Address":"not available",
+                "StartDate":"not available",
+                "EndDate":"not available",
+                "SpotsAvailable":"not available",
+                "ImageLink":image_url,
+                "AgeGroup": "8-14 years",
+                "Email":email,
+                "HostedBy":"IdTech",
+                "Category":"Tech Camp"
+        }
     else:
-        return {"Error": "Failed to fetch course details."}
+        return {
+            "URL": course_url,
+            "Error": "Failed to fetch course details."
+        }
 
 # Amplify Rocks scraping functions
 BASE_URL = "https://amplifyrocks.org/"

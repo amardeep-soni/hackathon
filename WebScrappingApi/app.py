@@ -159,7 +159,7 @@ def scrape_amplify_main():
             "Email": "jen@amplifyartsproject.org",
             "Phone": phone,
             "TestimonialsOrReviews": testimonials,
-            "ImageLink": image_url,
+            "ImageLink": ", ".join(image_url),
             "Highlights": highlights,
             
         }

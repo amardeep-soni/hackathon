@@ -90,7 +90,7 @@ export class CampsServiceProxy {
      * @param id (optional) 
      * @return OK
      */
-    getById(id: number | undefined): Observable<Camp> {
+    getById(id: number | undefined): Observable<CampsDto> {
         let url_ = this.baseUrl + "/api/Camps/GetById?";
         if (id === null)
             throw new Error("The parameter 'id' cannot be null.");
@@ -113,14 +113,14 @@ export class CampsServiceProxy {
                 try {
                     return this.processGetById(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<Camp>;
+                    return _observableThrow(e) as any as Observable<CampsDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<Camp>;
+                return _observableThrow(response_) as any as Observable<CampsDto>;
         }));
     }
 
-    protected processGetById(response: HttpResponseBase): Observable<Camp> {
+    protected processGetById(response: HttpResponseBase): Observable<CampsDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -131,7 +131,7 @@ export class CampsServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = Camp.fromJS(resultData200);
+            result200 = CampsDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -284,6 +284,7 @@ export class Camp implements ICamp {
     category!: string | undefined;
     hostedBy!: string | undefined;
     campLink!: string | undefined;
+    imageLink!: string | undefined;
 
     constructor(data?: ICamp) {
         if (data) {
@@ -319,6 +320,7 @@ export class Camp implements ICamp {
             this.category = _data["category"];
             this.hostedBy = _data["hostedBy"];
             this.campLink = _data["campLink"];
+            this.imageLink = _data["imageLink"];
         }
     }
 
@@ -354,6 +356,7 @@ export class Camp implements ICamp {
         data["category"] = this.category;
         data["hostedBy"] = this.hostedBy;
         data["campLink"] = this.campLink;
+        data["imageLink"] = this.imageLink;
         return data;
     }
 }
@@ -382,6 +385,163 @@ export interface ICamp {
     category: string | undefined;
     hostedBy: string | undefined;
     campLink: string | undefined;
+    imageLink: string | undefined;
+}
+
+export class CampsDto implements ICampsDto {
+    campName!: string | undefined;
+    address!: string | undefined;
+    email!: string | undefined;
+    phone!: string | undefined;
+    activitiesOffered!: string[] | undefined;
+    datesAndDurations!: string[] | undefined;
+    ageGroup!: string | undefined;
+    costsAndScholarships!: string | undefined;
+    testimonialsOrReviews!: string[] | undefined;
+    classSchedule!: string[] | undefined;
+    gender!: string | undefined;
+    price!: string | undefined;
+    startDate!: string | undefined;
+    endDate!: string | undefined;
+    capacity!: string | undefined;
+    registrationDeadline!: string | undefined;
+    spotsAvailable!: string | undefined;
+    highlights!: string | undefined;
+    language!: string | undefined;
+    category!: string | undefined;
+    campLink!: string | undefined;
+    imageLink!: string | undefined;
+    hostedBy!: string | undefined;
+
+    constructor(data?: ICampsDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.campName = _data["campName"];
+            this.address = _data["address"];
+            this.email = _data["email"];
+            this.phone = _data["phone"];
+            if (Array.isArray(_data["activitiesOffered"])) {
+                this.activitiesOffered = [] as any;
+                for (let item of _data["activitiesOffered"])
+                    this.activitiesOffered!.push(item);
+            }
+            if (Array.isArray(_data["datesAndDurations"])) {
+                this.datesAndDurations = [] as any;
+                for (let item of _data["datesAndDurations"])
+                    this.datesAndDurations!.push(item);
+            }
+            this.ageGroup = _data["ageGroup"];
+            this.costsAndScholarships = _data["costsAndScholarships"];
+            if (Array.isArray(_data["testimonialsOrReviews"])) {
+                this.testimonialsOrReviews = [] as any;
+                for (let item of _data["testimonialsOrReviews"])
+                    this.testimonialsOrReviews!.push(item);
+            }
+            if (Array.isArray(_data["classSchedule"])) {
+                this.classSchedule = [] as any;
+                for (let item of _data["classSchedule"])
+                    this.classSchedule!.push(item);
+            }
+            this.gender = _data["gender"];
+            this.price = _data["price"];
+            this.startDate = _data["startDate"];
+            this.endDate = _data["endDate"];
+            this.capacity = _data["capacity"];
+            this.registrationDeadline = _data["registrationDeadline"];
+            this.spotsAvailable = _data["spotsAvailable"];
+            this.highlights = _data["highlights"];
+            this.language = _data["language"];
+            this.category = _data["category"];
+            this.campLink = _data["campLink"];
+            this.imageLink = _data["imageLink"];
+            this.hostedBy = _data["hostedBy"];
+        }
+    }
+
+    static fromJS(data: any): CampsDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CampsDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["campName"] = this.campName;
+        data["address"] = this.address;
+        data["email"] = this.email;
+        data["phone"] = this.phone;
+        if (Array.isArray(this.activitiesOffered)) {
+            data["activitiesOffered"] = [];
+            for (let item of this.activitiesOffered)
+                data["activitiesOffered"].push(item);
+        }
+        if (Array.isArray(this.datesAndDurations)) {
+            data["datesAndDurations"] = [];
+            for (let item of this.datesAndDurations)
+                data["datesAndDurations"].push(item);
+        }
+        data["ageGroup"] = this.ageGroup;
+        data["costsAndScholarships"] = this.costsAndScholarships;
+        if (Array.isArray(this.testimonialsOrReviews)) {
+            data["testimonialsOrReviews"] = [];
+            for (let item of this.testimonialsOrReviews)
+                data["testimonialsOrReviews"].push(item);
+        }
+        if (Array.isArray(this.classSchedule)) {
+            data["classSchedule"] = [];
+            for (let item of this.classSchedule)
+                data["classSchedule"].push(item);
+        }
+        data["gender"] = this.gender;
+        data["price"] = this.price;
+        data["startDate"] = this.startDate;
+        data["endDate"] = this.endDate;
+        data["capacity"] = this.capacity;
+        data["registrationDeadline"] = this.registrationDeadline;
+        data["spotsAvailable"] = this.spotsAvailable;
+        data["highlights"] = this.highlights;
+        data["language"] = this.language;
+        data["category"] = this.category;
+        data["campLink"] = this.campLink;
+        data["imageLink"] = this.imageLink;
+        data["hostedBy"] = this.hostedBy;
+        return data;
+    }
+}
+
+export interface ICampsDto {
+    campName: string | undefined;
+    address: string | undefined;
+    email: string | undefined;
+    phone: string | undefined;
+    activitiesOffered: string[] | undefined;
+    datesAndDurations: string[] | undefined;
+    ageGroup: string | undefined;
+    costsAndScholarships: string | undefined;
+    testimonialsOrReviews: string[] | undefined;
+    classSchedule: string[] | undefined;
+    gender: string | undefined;
+    price: string | undefined;
+    startDate: string | undefined;
+    endDate: string | undefined;
+    capacity: string | undefined;
+    registrationDeadline: string | undefined;
+    spotsAvailable: string | undefined;
+    highlights: string | undefined;
+    language: string | undefined;
+    category: string | undefined;
+    campLink: string | undefined;
+    imageLink: string | undefined;
+    hostedBy: string | undefined;
 }
 
 export class WeatherForecast implements IWeatherForecast {

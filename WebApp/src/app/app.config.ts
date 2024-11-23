@@ -1,7 +1,7 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { API_BASE_URL } from '../shared/service-proxies/service-proxies';
+import { API_BASE_URL, CampsServiceProxy } from '../shared/service-proxies/service-proxies';
 import { BrowserModule } from '@angular/platform-browser';
 import {
   BrowserAnimationsModule,
@@ -33,5 +33,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     BrowserModule,
     BrowserAnimationsModule,
+    CampsServiceProxy
   ],
 };

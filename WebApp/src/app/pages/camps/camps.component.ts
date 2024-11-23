@@ -30,6 +30,7 @@ export class CampsComponent implements OnInit {
   ngOnInit(): void {
     this._campsService.getAll().subscribe((data) => {
       this.camps = data;
+      console.log(this.camps)
     });
   }
   router= inject(Router)

@@ -1,0 +1,15 @@
+<nav class="navbar">
+  <div class="logo"><i class="pi pi-globe"></i> WebScraper</div>
+  <button class="menu-toggle" (click)="toggleMenu()">
+    <i class="pi pi-bars"></i>
+  </button>
+  <ul [ngClass]="{ 'nav-links': true, active: isMenuOpen }">
+    <li><a [routerLink]="'home'">Home</a></li>
+    <li><a routerLink="#features">Features</a></li>
+    <li><a routerLink="#about">About</a></li>
+    <li><a routerLink="#contact">Contact</a></li>
+  </ul>
+  <div class="theme-toggle" (click)="toggleTheme()">
+    <i class="pi" [ngClass]="isDarkMode ? 'pi-moon' : 'pi-sun'"></i>
+  </div>
+</nav>

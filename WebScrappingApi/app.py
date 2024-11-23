@@ -9,6 +9,7 @@ data = [
     {"id": 3, "name": "Alice Johnson", "age": 25}
 ]
 
+
 # Define a route to return the data
 @app.route('/api/people', methods=['GET'])
 def get_people():

@@ -22,7 +22,7 @@ def scrape_course_links():
         for course in courses:
             link_tag = course.find('a', href=True)
             if link_tag:
-                # Append "4" to each link
+                # Append full link
                 full_link = BASE_URL + link_tag['href']
                 course_links.append(full_link)
 
@@ -37,24 +37,99 @@ def scrape_course_details(course_url):
     response = requests.get(course_url)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
+
+        # Extracting course title
+        title_tag = soup.find('h1', class_='text-undefined title px-2')
+        CampName = title_tag.find('span', class_='undefined').text.strip() if title_tag else "N/A"
+
+        # Scraping details from the list
+        details_list = soup.find('ul', class_='list-unstyled')
+
+        # Extract phone number
+        phone_tag = soup.find('a', href=lambda x: x and x.startswith('tel:'))
+        phone = phone_tag.text.strip() if phone_tag else "N/A"
+
+        # Extract email
+        email_tag = soup.find('a', href=lambda x: x and x.startswith('mailto:'))
+        email = email_tag.text.strip() if email_tag else "N/A"
+
+    #   for image link 
+        active_carousel_item = soup.find('div', class_='active carousel-item')
+
+        # Find the <img> tag inside the active carousel-item div
+        img_tag = active_carousel_item.find('img') if active_carousel_item else None
+
+        # Extract the 'src' attribute to get the image URL
+        image_url = img_tag['src'] if img_tag and 'src' in img_tag.attrs else "Image URL not found"
+
+
+
+        # Find the 'article' tag inside the desired section
+        article_tag = soup.find('div', class_='block generic-content').find('article')
+        highlights = article_tag.text.strip() if article_tag else "No description found"
         
-        # Example: Scrape some nested details from the course page
-        title = soup.find('h1').text.strip() if soup.find('h1') else "N/A"
-    # Extract the Camp Name from the nested span inside the h1 tag
-        camp_name_tag = soup.find('h1', class_='text-undefined title px-2')
-        if camp_name_tag:
-            camp_name = camp_name_tag.find('span', class_='undefined').text.strip() if camp_name_tag.find('span', class_='undefined') else "N/A"
-        else:
-            camp_name = "N/A"
-        
-        
-        description = soup.find('p').text.strip() if soup.find('p') else "N/A"
-        
+         # Extract class schedule
+        schedule_tag = soup.find('h2', string=lambda x: 'schedule' in (x or '').lower())
+        classChedules = schedule_tag.text.strip() if schedule_tag else "Schedule not found"
+
+        # Extract "You'll learn to" "ActivitiesOffered": activities_offered,
+
+        learn_to_section = soup.select_one('.static-component .block.generic-content ul')
+        activities_offered = [li.text for li in learn_to_section.find_all('li')] if learn_to_section else []
+      
+      
+
+        testimonialsOrReviews_sections = soup.find_all('div', class_='tp-widget-review-content')
+
+        # Extract the 'text' content from each section if available
+        testimonialsOrReviews = [review.find('div', class_='text').text.strip() for review in testimonialsOrReviews_sections if review.find('div', class_='text')]
+
+        # Extract the list items and their values
+        course_details = {
+            "Price": "N/A",
+            "AgeGroup": "N/A",  # Change "Age" to "AgeGroup"
+            "DatesAndDurations": "N/A",  # Change "Duration" to "DatesAndDurations"
+        }
+
+        if details_list:
+            for li in details_list.find_all('li', class_='pb-1'):
+                strong_tag = li.find('strong')
+                if strong_tag:
+                    key = strong_tag.text.strip().replace(":", "")
+                    value = li.text.strip().replace(strong_tag.text.strip(), "").strip()
+
+                    # Check if the key matches "Age" and change it to "AgeGroup"
+                    if key == "Age":
+                        key = "AgeGroup"
+                    
+                    # Check if the key matches "Duration" and change it to "DatesAndDurations"
+                    if key == "Duration":
+                        key = "DatesAndDurations"
+
+                    if key in course_details:
+                        course_details[key] = value
         return {
-            "URL": course_url,
-            "Title": title,
-            "Camp Name": camp_name,
-            "Description": description,
+            "CampLink": course_url,
+            "CampName": CampName,
+            **course_details,
+            "Phone": phone,
+            "Highlights": highlights,
+            "ClassSchedule": classChedules,
+            "ActivitiesOffered": activities_offered,
+            "TestimonialsOrReviews": testimonialsOrReviews,
+            "Language": "English",  # Added Language
+            "RegistrationDeadline": "not available",  # Added Registration Deadline
+            "Capacity": "not available",  # Added Capacity
+            "SpotsAvailable": "not available",  # Added Spots Available
+            "Gender":"Both",
+            "CostsAndScholarships":"not available",
+            "Address":"not available",
+            "StartDate":"not available",
+            "EndDate":"not available",
+            "SpotsAvailable":"not available",
+            "ImageLink":image_url,
+            "AgeGroup": "8-14 years",
+            "Email":email
         }
     else:
         return {

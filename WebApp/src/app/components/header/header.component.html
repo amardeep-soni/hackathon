@@ -5,9 +5,9 @@
   </button>
   <ul [ngClass]="{ 'nav-links': true, active: isMenuOpen }">
     <li><a [routerLink]="''">Home</a></li>
-    <li><a routerLink="#features">Features</a></li>
-    <li><a routerLink="#about">About</a></li>
-    <li><a routerLink="#contact">Contact</a></li>
+    <li><a routerLink="/camps">Camps</a></li>
+    <li><a routerLink="/about">About</a></li>
+    <li><a routerLink="/contact">Contact</a></li>
   </ul>
   <div class="theme-toggle" (click)="toggleTheme()">
     <i class="pi" [ngClass]="isDarkMode ? 'pi-moon' : 'pi-sun'"></i>

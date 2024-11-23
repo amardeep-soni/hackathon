@@ -1,19 +1,28 @@
 import { Routes } from '@angular/router';
-import { HeroComponent } from './pages/hero/hero.component'; 
+import { HeroComponent } from './pages/hero/hero.component';
 import { CampsComponent } from './pages/camps/camps.component';
 import { CampDetailsComponent } from './pages/camp-details/camp-details.component';
+import { AboutComponent } from './pages/about/about.component';
 
 export const routes: Routes = [
-    {
-        path:'', 
-        component:HeroComponent
-    },
-    {
-        path:'camps',
-        component:CampsComponent
-    },
-    {
-        path:'camps/:id',
-        component:CampDetailsComponent
-    }
+  {
+    path: '',
+    component: HeroComponent,
+  },
+  {
+    path: 'camps',
+    component: CampsComponent,
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
+  {
+    path: 'contact',
+    component: AboutComponent,
+  },
+  {
+    path: 'camps/:id',
+    component: CampDetailsComponent,
+  },
 ];

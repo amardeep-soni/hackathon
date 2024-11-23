@@ -183,7 +183,7 @@ def scrape_rates_and_dates():
 
         return {
             "Price": DatesAndDurations,
-            "DatesAndDurations": DatesAndDurations,
+            "DatesAndDurations": [DatesAndDurations],
             "StartDate": start_date,
             "EndDate": end_date,
             "Capacity": "N/A",
@@ -199,7 +199,7 @@ def get_amplify_rocks_data():
     main_data = scrape_amplify_main()
     rates_data = scrape_rates_and_dates()
 
-    full_data = {
+    full_data = [{
         **main_data,
         **rates_data,
         "ActivitiesOffered": ["Outdoor Activities", "Music", "Arts"],
@@ -211,8 +211,8 @@ def get_amplify_rocks_data():
         "Language": "English",
         "Category": "Outdoor Adventure",
         "CampLink": BASE_URL,
-        "HostName": "Amplify",
-    }
+        "HostedBy": "Amplify",
+    }]
     return jsonify(full_data)
 
 # Flask route for iD Tech course data

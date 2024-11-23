@@ -5,38 +5,41 @@ using System;
 using WebApi.Entities;
 using WebApi.Features;
 using WebApi.Repositories;
-public class ScrappingRepository(CampsDbContext _dbContext, IMapper _mapper)
+
+namespace WebApi.Repositories
 {
-	public async Task SaveScrappingData()
+	public class ScrappingRepository(CampsDbContext _dbContext, IMapper _mapper)
 	{
-		var urls = new List<string> { "https://test-flask-six-sigma.vercel.app/api/courses"};  // URL of your Flask API
-		using (HttpClient client = new HttpClient())
+		public async Task SaveScrappingData()
 		{
-			await _dbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Camps");
-			foreach (var url in urls)
+			var urls = new List<string> { "https://test-flask-six-sigma.vercel.app/api/courses"};  // URL of your Flask API
+			using (HttpClient client = new HttpClient())
 			{
-
-				try
+				await _dbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Camps");
+				foreach (var url in urls)
 				{
-					// Send GET request to Flask API
-					HttpResponseMessage response = await client.GetAsync(url);
-					response.EnsureSuccessStatusCode();
 
-					// Read the JSON response
-					string jsonResponse = await response.Content.ReadAsStringAsync();
-					var courseDto = JsonConvert.DeserializeObject<List<CampsDto>>(jsonResponse);
-					var courses = _mapper.Map<List<CampStagging>>(courseDto);
-
-					if (courses.Count > 0)
+					try
 					{
-						// Clear Staging Table
-						await _dbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE CampStaggings");
+						// Send GET request to Flask API
+						HttpResponseMessage response = await client.GetAsync(url);
+						response.EnsureSuccessStatusCode();
 
-						// Insert into Staging Table
-						await _dbContext.CampStaggings.AddRangeAsync(courses);
-						await _dbContext.SaveChangesAsync();
-						// Merge Staging Table into Main Table
-						string mergeQuery = @"
+						// Read the JSON response
+						string jsonResponse = await response.Content.ReadAsStringAsync();
+						var courseDto = JsonConvert.DeserializeObject<List<CampsDto>>(jsonResponse);
+						var courses = _mapper.Map<List<CampStagging>>(courseDto);
+
+						if (courses.Count > 0)
+						{
+							// Clear Staging Table
+							await _dbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE CampStaggings");
+
+							// Insert into Staging Table
+							await _dbContext.CampStaggings.AddRangeAsync(courses);
+							await _dbContext.SaveChangesAsync();
+							// Merge Staging Table into Main Table
+							string mergeQuery = @"
 							SET IDENTITY_INSERT Camps ON;
 
 							MERGE INTO Camps AS Target
@@ -75,12 +78,13 @@ public class ScrappingRepository(CampsDbContext _dbContext, IMapper _mapper)
 
 							SET IDENTITY_INSERT Camps OFF;
 							";
-						await _dbContext.Database.ExecuteSqlRawAsync(mergeQuery);
+							await _dbContext.Database.ExecuteSqlRawAsync(mergeQuery);
+						}
 					}
-				}
-				catch
-				{
-					continue;
+					catch
+					{
+						continue;
+					}
 				}
 			}
 		}

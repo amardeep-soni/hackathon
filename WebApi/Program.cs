@@ -65,7 +65,11 @@ try
 
 	var app = builder.Build();
 
-	app.UseHangfireDashboard();
+	app.UseHangfireDashboard("/hangfire", new DashboardOptions
+	{
+		Authorization = new[] { new AllowAllDashboardAuthorization() }
+	});
+
 
 	// Configure the HTTP request pipeline.
 	//if (app.Environment.IsDevelopment())

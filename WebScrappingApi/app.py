@@ -26,7 +26,7 @@ def scrape_course_links():
                 course_links.append(full_link)
 
         # Return only the first 4 links
-        return course_links[:4]
+        return course_links[:2]
     else:
         print("Error: Failed to fetch the website data.")
         return []
@@ -84,11 +84,10 @@ def scrape_course_details(course_url):
         # Extract the 'text' content from each section if available
         testimonialsOrReviews = [review.find('div', class_='text').text.strip() for review in testimonialsOrReviews_sections if review.find('div', class_='text')]
 
-        # Extract the list items and their values
         course_details = {
             "Price": "N/A",
             "AgeGroup": "N/A",  # Change "Age" to "AgeGroup"
-            "DatesAndDurations": "N/A",  # Change "Duration" to "DatesAndDurations"
+            "DatesAndDurations": [],  # Change "Duration" to "DatesAndDurations" and initialize as an empty list
         }
 
         if details_list:
@@ -107,34 +106,40 @@ def scrape_course_details(course_url):
                         key = "DatesAndDurations"
 
                     if key in course_details:
-                        course_details[key] = value
-        return {
-            "CampLink": course_url,
-            "CampName": CampName,
-            **course_details,
-            "Phone": phone,
-            "Highlights": highlights,
-            "ClassSchedule": "not available",
-            "ActivitiesOffered": activities_offered,
-            "TestimonialsOrReviews": testimonialsOrReviews,
-            "Language": "English",  # Added Language
-            "RegistrationDeadline": "not available",  # Added Registration Deadline
-            "Capacity": "not available",  # Added Capacity
-            "SpotsAvailable": "not available",  # Added Spots Available
-            "Gender":"Both",
-            "CostsAndScholarships":"not available",
-            "Address":"not available",
-            "StartDate":"not available",
-            "EndDate":"not available",
-            "SpotsAvailable":"not available",
-            "ImageLink":image_url,
-            "AgeGroup": "8-14 years",
-            "Email":email,
-            "HostedBy":"IdTech",
-            "Category":"Tech Camp"
-            
-            
-            
+                        # If the key is "DatesAndDurations", split the value into a list
+                        if key == "DatesAndDurations":
+                            # Split based on commas or other delimiters if necessary
+                            course_details[key] = [value]
+
+                        else:
+                            # For other keys, just assign the value directly
+                            course_details[key] = value
+
+
+            return {
+                "CampLink": course_url,
+                "CampName": CampName,
+                **course_details,
+                "Phone": phone,
+                "Highlights": highlights,
+                "ClassSchedule": [],
+                "ActivitiesOffered": activities_offered,
+                "TestimonialsOrReviews": testimonialsOrReviews,
+                "Language": "English",  # Added Language
+                "RegistrationDeadline": "not available",  # Added Registration Deadline
+                "Capacity": "not available",  # Added Capacity
+                "SpotsAvailable": "not available",  # Added Spots Available
+                "Gender":"Both",
+                "CostsAndScholarships":"not available",
+                "Address":"not available",
+                "StartDate":"not available",
+                "EndDate":"not available",
+                "SpotsAvailable":"not available",
+                "ImageLink":image_url,
+                "AgeGroup": "8-14 years",
+                "Email":email,
+                "HostedBy":"IdTech",
+                "Category":"Tech Camp"
         }
     else:
         return {

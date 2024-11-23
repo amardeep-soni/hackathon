@@ -1,9 +1,14 @@
 .container {
   padding: 32px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   max-width: 1200px;
 }
+::ng-deep.p-progress-spinner {
+  width: 150px !important;
+  height: 150px !important;
+}
+
 
 .upper {
   display: flex;
@@ -57,7 +62,7 @@
 }
 
 .aboutCamp {
-  width: 100%; 
+  width: 100%;
 }
 
 .aboutCamp>div:nth-child(1) {
@@ -78,7 +83,7 @@
   font-weight: 600;
   margin-bottom: 24px;
 }
- 
+
 
 .activities h3,
 .classSchedule h3,
@@ -130,7 +135,7 @@
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
- 
+
 }
 
 .time-card:hover {

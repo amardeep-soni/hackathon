@@ -1,3 +1,6 @@
+
+@if (!loading) {
+
 <div class="container d-flex justify-content-center align-items-center">
   <div class="upper">
     <div class="campImg">
@@ -25,9 +28,16 @@
         <span>Category:</span>
         {{ camp.category }}
       </p>
+      <p>
+        <span>Category:</span>
+        {{ camp.datesAndDurations }}
+      </p>
 
       <div class="mt-3 text-end">
-        <a [href]="camp.campLink" target="_blank" class="btn btn-primary visitBtn"
+        <a
+          [href]="camp.campLink"
+          target="_blank"
+          class="btn btn-primary visitBtn"
           >Visit Our Website</a
         >
       </div>
@@ -37,16 +47,18 @@
   <div class="aboutCamp d-flex">
     <div class="d-flex gap-2 flex-column">
       <div class="aboutcourse"></div>
-        <h3>About This Course</h3>
-        <div>
-         <p>{{camp.highlights}}</p>
-        </div>
+      <h3>About This Course</h3>
+      <div>
+        <p>{{ camp.highlights }}</p>
+      </div>
       <div class="activities">
         <h3>Activites Offered</h3>
         <div>
           <ol [type]="1">
             @for (activity of camp.activitiesOffered; track $index) {
+
             <li>{{ activity }}</li>
+
             }
           </ol>
         </div>
@@ -56,7 +68,9 @@
         <div>
           <ol type="1">
             @for (schedule of camp.classSchedule; track $index) {
-            <li>{{ schedule }}</li>
+
+            <li>{{ schedule[0] }}</li>
+
             }
           </ol>
         </div>
@@ -66,62 +80,70 @@
         <div>
           <ul type="1">
             @for (datesDuration of camp.datesAndDurations; track $index) {
+
             <li>{{ datesDuration }}</li>
+
             }
           </ul>
         </div>
       </div>
     </div>
     <div class="d-flex flex-column-reverse align-items-end">
-      
-    <div class="startEnd">
-      <div class="time-block">
-        <div class="time-card start">
-          <div class="time-icon">
-            <i class="fas fa-calendar-alt"></i>
+      <div class="startEnd">
+        <div class="time-block">
+          <div class="time-card start">
+            <div class="time-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="time-details">
+              <h6>Start Date</h6>
+              <p>{{ camp.startDate }}</p>
+            </div>
           </div>
-          <div class="time-details">
-            <h6>Start Date</h6>
-            <p>{{ camp.startDate }}</p>
-          </div>
-        </div>
 
-        <div class="time-divider"> 
-          <i class="fas fa-arrow-right"></i> 
-        </div>
-
-        <div class="time-card end">
-          <div class="time-icon">
-            <i class="fas fa-calendar-check"></i>
+          <div class="time-divider">
+            <i class="fas fa-arrow-right"></i>
           </div>
-          <div class="time-details">
-            <h6>End Date</h6>
-            <p>{{ camp.endDate }}</p>
+
+          <div class="time-card end">
+            <div class="time-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="time-details">
+              <h6>End Date</h6>
+              <p>{{ camp.endDate }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="contactInfo">
-      <h3 class="m-0">Contact Information</h3>
-      <div class="contact-details">
-        <p>
-          <span>Address:</span>
-          {{ camp.address }}
-        </p>
-        <p>
-          <span>Email:</span>
-          {{ camp.email }}
-        </p>
-        <p>
-          <span>Phone:</span>
-          {{ camp.phone }}
-        </p>
-        <p>
-          <span>Language</span>
-          {{ camp.language }}
-        </p>
+      <div class="contactInfo">
+        <h3 class="m-0">Contact Information</h3>
+        <div class="contact-details">
+          <p>
+            <span>Address:</span>
+            {{ camp.address }}
+          </p>
+          <p>
+            <span>Email:</span>
+            {{ camp.email }}
+          </p>
+          <p>
+            <span>Phone:</span>
+            {{ camp.phone }}
+          </p>
+          <p>
+            <span>Language</span>
+            {{ camp.language }}
+          </p>
+        </div>
       </div>
-    </div>
     </div>
   </div>
-  </div> 
+</div>
+
+}
+@else {
+  <div class=" d-flex align-items-center justify-content-center w-100" style="height: 60vh;" role="status">
+    <p-progressSpinner ariaLabel="loading" />
+  </div>
+}

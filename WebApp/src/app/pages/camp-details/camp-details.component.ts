@@ -6,23 +6,29 @@ import {
   CampsServiceProxy,
 } from '../../../shared/service-proxies/service-proxies';
 import { gsap } from 'gsap';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 @Component({
   selector: 'app-camp-details',
   standalone: true,
-  imports: [],
+  imports: [ProgressSpinnerModule],
   templateUrl: './camp-details.component.html',
   styleUrl: './camp-details.component.css',
 })
 export class CampDetailsComponent {
+  loading:boolean = false;
   id: number = 0;
   route = inject(ActivatedRoute);
   constructor(private _campsService: CampsServiceProxy) {}
   camp: CampsDto;
   ngOnInit() {    window.scrollTo(0, 0);
+    this.loading=true
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     // console.log(this.id);
     this._campsService.getById(this.id).subscribe((data: any) => {
-      this.camp = data;
+      if(data){
+this.loading = false
+        this.camp = data;
+      }
       console.log(data);
     });
     // this.gsapAnimation();

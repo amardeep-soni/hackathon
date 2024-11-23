@@ -2,7 +2,6 @@
 {
 	public class CampsDto
 	{
-		public int Id { get; set; }
 		public string CampName { get; set; }
 		public string Address { get; set; }
 		public string Email { get; set; }
@@ -25,5 +24,6 @@
 		public string Category { get; set; }
 		public string CampLink { get; set; }
 		public string ImageLink { get; set; }
+		public string HostedBy { get; set; }
 	}
 }

@@ -1,31 +1,86 @@
 using Microsoft.EntityFrameworkCore;
+using WebApi.Fetatures;
 using WebApi.Repositories;
 
-var builder = WebApplication.CreateBuilder(args);
+try
+{
+	string DefaultCorsPolicyName = "hackathon";
+	var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+	// Add services to the container.
+	builder.Services.AddControllers();
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+	// Set up Swagger (for development purposes)
+	builder.Services.AddEndpointsApiExplorer();
+	builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<CampsDbContext>(options =>
-	options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
+	// Database context configuration
+	builder.Services.AddDbContext<CampsDbContext>(options =>
+		options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"))
+	);
 
-var app = builder.Build();
+	// AutoMapper configuration
+	builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-	app.UseSwagger();
-	app.UseSwaggerUI();
-//}
+	// Repositories
+	builder.Services.AddScoped<ScrappingRepository>();
+	builder.Services.AddScoped<CampsRepository>();
 
-app.UseHttpsRedirection();
+	// CORS configuration
+	builder.Services.AddCors(options =>
+	{
+		options.AddPolicy(DefaultCorsPolicyName, corsBuilder =>
+		{
+			// Get CORS origins from configuration (appsettings.json or other config)
+			var allowedOrigins = builder.Configuration["App:CorsOrigins"]
+				?.Split(",", StringSplitOptions.RemoveEmptyEntries)
+				.Select(o => o.TrimEnd('/')) // Ensure no trailing slashes
+				.ToArray();
 
-app.UseAuthorization();
+			// Allow specific origins and setup other CORS rules
+			if (allowedOrigins != null && allowedOrigins.Any())
+			{
+				corsBuilder.WithOrigins(allowedOrigins)  // Allow only the defined origins
+						   .SetIsOriginAllowedToAllowWildcardSubdomains()
+						   .AllowAnyHeader()
+						   .AllowAnyMethod()
+						   .AllowCredentials();  // Allow credentials like cookies if necessary
+			}
+			else
+			{
+				// If no valid origins are provided, this will block all requests
+				corsBuilder.AllowAnyOrigin()  // Fallback, in case the origin is not specified
+						   .AllowAnyHeader()
+						   .AllowAnyMethod();
+			}
+		});
+	});
 
-app.MapControllers();
+	var app = builder.Build();
 
-app.Run();
+	// Configure the HTTP request pipeline.
+	if (app.Environment.IsDevelopment())
+	{
+		// Swagger UI only in development
+		app.UseSwagger();
+		app.UseSwaggerUI();
+	}
+
+	// Enforce HTTPS redirection
+	app.UseHttpsRedirection();
+
+	// Enable CORS policy globally
+	app.UseCors(DefaultCorsPolicyName);
+
+	app.UseAuthorization();
+
+	// Map API controllers
+	app.MapControllers();
+
+	// Start the application
+	app.Run();
+}
+catch (Exception ex)
+{
+	Console.WriteLine(ex.Message);
+}

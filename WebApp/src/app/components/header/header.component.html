@@ -1,39 +1,57 @@
-<nav class="navbar">
-  <div class="logo"><i class="pi pi-globe"></i> WebScraper</div>
-  <button class="menu-toggle" (click)="toggleMenu()">
-    <i class="pi pi-bars"></i>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="logo d-flex align-items-center">
+    <i class="pi pi-globe"></i> WebScraper
+  </div>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="d-flex gap-5 justify-content-center align-items-center">
-    <ul [ngClass]="{ 'nav-links': true, active: isMenuOpen }" class="mr-3">
-      <li><a [routerLink]="''">Home</a></li>
-      <li><a routerLink="/camps">Camps</a></li>
-      <li><a routerLink="/about">About</a></li>
-      <li><a routerLink="/contact">Contact</a></li>
+
+  <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+    <ul class="navbar-nav mr-5">
+      <li class="nav-item active">
+        <a class="nav-link" href="/"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/camps">Camps</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact</a>
+      </li>
     </ul>
-    <div class="contact d-flex align-items-center justify-content-center">
-      <ul class="d-flex list-unstyled gap-3 align-items-center m-0">
-        <li>
-          <a href="tel:+1234567890" class="text-white">
-            <i class="pi pi-phone text-white"></i>
-          </a>
-        </li>
-        <li>
-          <a href="mailto:example@example.com" class="text-white">
-            <i class="pi pi-envelope text-white"></i>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.facebook.com" target="_blank" class="text-white">
-            <i class="pi pi-facebook text-white"></i>
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com" target="_blank" class="text-white">
-            <i class="pi pi-twitter text-white"></i>
-          </a>
-        </li>
-      </ul>
+
+    <div class="contact d-flex align-items-center w-25">
+      <div class="d-flex w-100 justify-content-end">
+        <ul class="d-flex list-unstyled gap-3 m-0">
+          <li>
+            <a  >
+              <i class="pi pi-phone  "></i>
+            </a>
+          </li>
+          <li>
+            <a target="_blank"  >
+              <i class="pi pi-facebook  "></i>
+            </a>
+          </li>
+          <li>
+            <a target="_blank"  >
+              <i class="pi pi-twitter "></i>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-    
   </div>
 </nav>

@@ -334,6 +334,10 @@ export class HeroComponent {
   onCardClick(id: number) {
     this.router.navigate(['camps', id]);
   }
+  rediredToAbout(){
+
+    this.router.navigate(['/about']);
+  }
   trackByCampId(index: number, camp: any): number {
     return camp.id;
   }
@@ -342,6 +346,6 @@ export class HeroComponent {
       duration:2,
       y:100,
       opacity:0
-    })  
+    })
   }
 }

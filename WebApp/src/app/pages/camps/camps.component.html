@@ -6,7 +6,7 @@
 <div class="row" style="margin-left: 0 !important; margin-right: 0 !important;">
   @for (camp of camps; track camp.id) {
   <div class="col-4 d-flex justify-content-center py-3 flex-wrap gap-3 my-3">
-    <div class="card p-2" style="width: 22rem; cursor: pointer; margin-top: 1rem" (click)="onCardClick(camp.id)">
+    <div class="card p-2 rounded-4" style="width: 22rem; cursor: pointer; margin-top: 1rem; " (click)="onCardClick(camp.id)">
       <img class="card-img-top rounded-4" [src]="camp.imageLink" alt="Card image cap" />
       <div class="card-body">
         <div class="col">
@@ -14,11 +14,11 @@
         </div>
         <div class="col">
           <div class="row-6">
-            <p>Ages: {{ camp.ageGroup }}</p>
+            <p>Ages:- {{ camp.ageGroup }}</p>
           </div>
           <div class="row-6">
-            <p>{{ camp.gender }}</p>
-            <p>Price:- ${{ camp.price }}</p>
+            <p>Gender:- {{ camp.gender }}</p>
+            <p>Price:- {{ camp.price }}</p>
             <p>
               Category:- @if(camp.category=='female'){
 

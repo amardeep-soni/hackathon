@@ -51,9 +51,16 @@
   color: white !important;
   padding: 5rem;
 }
+.content h1{
+  font-size: 5.5vw;
+  text-align: center;
+  line-height: 70px;
+  font-weight: 600;
+}
 
 .content p {
   color: white;
+  font-size: 1.3rem;
 }
 
 .swiper-button-prev,

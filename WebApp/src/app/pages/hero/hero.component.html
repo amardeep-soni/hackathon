@@ -14,9 +14,9 @@
       <div class="content">
         <h1>Smart Web Scraping for Smarter Decisions</h1>
         <p class="text-center">
-          Whether you need large-scale data extraction, real-time updates, or
-          custom scraping solutions, we’re here to empower your projects with
-          precision, speed, and efficiency.
+          Whether you need large-scale data extraction, real-time updates,
+          <br />
+          or custom scraping solutions,
         </p>
       </div>
       <img
@@ -28,11 +28,11 @@
     </swiper-slide>
     <swiper-slide class="slide2">
       <div class="content">
-        <h1>Smart Web Scraping for Smarter Decisions</h1>
+        <h1>Challange and new relationships</h1>
         <p class="text-center">
-          Whether you need large-scale data extraction, real-time updates, or
-          custom scraping solutions, we’re here to empower your projects with
-          precision, speed, and efficiency.
+          Whether you need large-scale data extraction, real-time updates,
+          <br />
+          or custom scraping solutions,
         </p>
       </div>
       <img
@@ -44,13 +44,14 @@
     </swiper-slide>
     <swiper-slide class="slide3">
       <div class="content">
-        <h1>Smart Web Scraping for Smarter Decisions</h1>
+        <h1>A Chance to provided creative experience</h1>
         <p class="text-center">
-          Whether you need large-scale data extraction, real-time updates, or
-          custom scraping solutions, we’re here to empower your projects with
-          precision, speed, and efficiency.
+          Whether you need large-scale data extraction, real-time updates,
+          <br />
+          or custom scraping solutions,
         </p>
       </div>
+
       <img
         src="https://campnorthstarmaine.com/wp-content/uploads/2018/11/box2-experience-1-1.jpg"
         class="img-fluid rounded-top"
@@ -63,37 +64,64 @@
 </div>
 
 <div class="cardSection">
-  <div class="cards p-3 d-flex gap-2 justify-content-center">
-    <div
-      class="card p-2"
-      style="width: 18rem; cursor: pointer; height: 22rem; margin: 3rem"
-      (click)="onCardClick(1)"
-    >
-      <img
-        class="card-img-top h-50 rounded-4"
-        src="https://s3.us-west-1.amazonaws.com/idtech-2018-media-prd/listing_university_washington_32c75dfd8a.jpg"
-        alt="Card image cap"
-      />
-      <div class="card-body">
-        <div class="col">
-          <h5 class="card-title">BattleBots® Camp Junior</h5>
-        </div>
-        <div class="col">
-          <div class="row-6">
-            <p>Ages: 6-7</p>
+  <div
+    class="row d-flex flex-wrap"
+    style="margin-left: 0 !important; margin-right: 0 !important"
+  >
+    <swiper-container navigation="true" space-between="30" free-mode="true">
+      <!-- Loop through the camps dynamically -->
+      <swiper-slide *ngFor="let camp of camps; trackBy: trackByCampId">
+        <div
+          class="d-flex justify-content-center py-3 flex-wrap gap-3 m-3 col-12"
+        >
+          <div
+            class="card p-2"
+            style="width: 22rem; cursor: pointer; margin-top: 1rem"
+            (click)="onCardClick(camp.id)"
+          >
+            <img
+              class="card-img-top rounded-4"
+              [src]="camp.imageLink"
+              alt="Card image cap"
+            />
+            <div class="card-body">
+              <div class="col">
+                <h5 class="card-title">
+                  {{ camp.campName | slice : 0 : 15 }}...
+                </h5>
+              </div>
+              <div class="col">
+                <div class="row-6">
+                  <p>Ages: {{ camp.ageGroup }}</p>
+                </div>
+                <div class="row-6">
+                  <p>{{ camp.gender }}</p>
+                  <p>Price: ${{ camp.price }}</p>
+                  <p>
+                    Category:
+                    <ng-container [ngSwitch]="camp.category">
+                      <span *ngSwitchCase="'female'">
+                        <i class="fa-solid fa-venus"></i> {{ camp.category }}
+                      </span>
+                      <span *ngSwitchCase="'male'">
+                        <i class="fa-solid fa-mars"></i> {{ camp.category }}
+                      </span>
+                      <span *ngSwitchDefault>
+                        {{ camp.category }}
+                      </span>
+                    </ng-container>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="row-6">
-            <p>Male</p>
-            <p>Price:- $45</p>
-            <p>Category:- <i class="fa-solid fa-venus"></i> female</p>
-          </div>
         </div>
-      </div>
-    </div>
+      </swiper-slide>
+    </swiper-container>
   </div>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <button class="btn btn-primary" (click)="onViewMore()">View More</button>
-    </div>
+</div>
+<div class="col d-flex align-items-center justify-content-center">
+  <div class="row-3">
+    <button class="btn btn-primary" (click)="onViewMore()">Veiw more</button>
   </div>
 </div>

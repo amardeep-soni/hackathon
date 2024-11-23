@@ -3,13 +3,37 @@
   <button class="menu-toggle" (click)="toggleMenu()">
     <i class="pi pi-bars"></i>
   </button>
-  <ul [ngClass]="{ 'nav-links': true, active: isMenuOpen }">
-    <li><a [routerLink]="''">Home</a></li>
-    <li><a routerLink="/camps">Camps</a></li>
-    <li><a routerLink="/about">About</a></li>
-    <li><a routerLink="/contact">Contact</a></li>
-  </ul>
-  <div class="theme-toggle" (click)="toggleTheme()">
-    <i class="pi" [ngClass]="isDarkMode ? 'pi-moon' : 'pi-sun'"></i>
+  <div class="d-flex gap-5 justify-content-center align-items-center">
+    <ul [ngClass]="{ 'nav-links': true, active: isMenuOpen }" class="mr-3">
+      <li><a [routerLink]="''">Home</a></li>
+      <li><a routerLink="/camps">Camps</a></li>
+      <li><a routerLink="/about">About</a></li>
+      <li><a routerLink="/contact">Contact</a></li>
+    </ul>
+    <div class="contact d-flex align-items-center justify-content-center">
+      <ul class="d-flex list-unstyled gap-3 align-items-center m-0">
+        <li>
+          <a href="tel:+1234567890" class="text-white">
+            <i class="pi pi-phone text-white"></i>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:example@example.com" class="text-white">
+            <i class="pi pi-envelope text-white"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com" target="_blank" class="text-white">
+            <i class="pi pi-facebook text-white"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://twitter.com" target="_blank" class="text-white">
+            <i class="pi pi-twitter text-white"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
   </div>
 </nav>

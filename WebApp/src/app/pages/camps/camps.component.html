@@ -1,24 +1,13 @@
 <div class="backgroundImg"></div>
 
-<div class="row text-center text-capitalize pt-4">
+<div class="text-center text-capitalize pt-4">
   <h1>get our all the camps</h1>
 </div>
-<div class="row d-flex justify-content-center">
-  <div
-    class="cards col-10 d-flex justify-content-center pt-3 flex-wrap gap-3 my-3 py-5"
-    style="height: 100vh"
-  >
-    @for (camp of camps; track camp.id) {
-    <div
-      class="card p-2"
-      style="width: 18rem; cursor: pointer; height: 22rem; margin-top: 1rem"
-      (click)="onCardClick(camp.id)"
-    >
-      <img
-        class="card-img-top h-50 rounded-4"
-        [src]="camp.imageLink"
-        alt="Card image cap"
-      />
+<div class="row" style="margin-left: 0 !important; margin-right: 0 !important;">
+  @for (camp of camps; track camp.id) {
+  <div class="col-4 d-flex justify-content-center py-3 flex-wrap gap-3 my-3">
+    <div class="card p-2" style="width: 22rem; cursor: pointer; margin-top: 1rem" (click)="onCardClick(camp.id)">
+      <img class="card-img-top rounded-4" [src]="camp.imageLink" alt="Card image cap" />
       <div class="card-body">
         <div class="col">
           <h5 class="card-title">{{ camp.campName }}</h5>
@@ -45,8 +34,8 @@
         </div>
       </div>
     </div>
-    }
   </div>
+  }
 </div>
 <!-- 
 {

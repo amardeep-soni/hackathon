@@ -1,3 +1,4 @@
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Fetatures;
 using WebApi.Repositories;
@@ -56,13 +57,21 @@ try
 		});
 	});
 
+
+	// Add Hangfire services
+	builder.Services.AddHangfire(configuration =>
+		configuration.UseSqlServerStorage(builder.Configuration.GetConnectionString("DbConnection")));
+	builder.Services.AddHangfireServer();
+
 	var app = builder.Build();
+
+	app.UseHangfireDashboard();
 
 	// Configure the HTTP request pipeline.
 	//if (app.Environment.IsDevelopment())
 	//{
-		// Swagger UI only in development
-		app.UseSwagger();
+	// Swagger UI only in development
+	app.UseSwagger();
 		app.UseSwaggerUI();
 	//}
 

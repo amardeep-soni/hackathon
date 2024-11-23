@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #3498db;
+    --bg-color-light: #ffffff;
+    --bg-color-dark: #2c3e50;
+    --text-color-light: #2c3e50;
+    --text-color-dark: #ecf0f1;
+  }
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-color-light);
+    overflow-x: hidden;
+  }
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  body.light-mode {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+  }
+  
+  body.dark-mode {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+  }

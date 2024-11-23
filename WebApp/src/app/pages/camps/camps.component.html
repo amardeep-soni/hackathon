@@ -1,36 +1,87 @@
 <div class="backgroundImg"></div>
 
-<div class="row text-center text-capitalize pt-4  ">
+<div class="row text-center text-capitalize pt-4">
   <h1>get our all the camps</h1>
 </div>
 <div class="row d-flex justify-content-center">
-  @for (camp of camps; track camp.id) {
-  <div class="cards col-10 d-flex justify-content-center pt-3 flex-wrap gap-3 my-3 py-5" style="height: 100vh">
-    <div class="card p-2" style="width: 18rem; cursor: pointer; height: 22rem; margin-top:5rem;"
-      (click)="onCardClick(1)">
-      <img class="card-img-top h-50 rounded-4"
-        src="https://s3.us-west-1.amazonaws.com/idtech-2018-media-prd/listing_university_washington_32c75dfd8a.jpg"
-        alt="Card image cap" />
+  <div
+    class="cards col-10 d-flex justify-content-center pt-3 flex-wrap gap-3 my-3 py-5"
+    style="height: 100vh"
+  >
+    @for (camp of camps; track camp.id) {
+    <div
+      class="card p-2"
+      style="width: 18rem; cursor: pointer; height: 22rem; margin-top: 1rem"
+      (click)="onCardClick(camp.id)"
+    >
+      <img
+        class="card-img-top h-50 rounded-4"
+        [src]="camp.imageLink"
+        alt="Card image cap"
+      />
       <div class="card-body">
         <div class="col">
-          <h5 class="card-title">BattleBots® Camp Junior</h5>
+          <h5 class="card-title">{{ camp.campName }}</h5>
         </div>
         <div class="col">
           <div class="row-6">
-            <p>Ages: 6-7</p>
+            <p>Ages: {{ camp.ageGroup }}</p>
           </div>
           <div class="row-6">
-            <p>Male</p>
-            <p>Price:- $45</p>
-            <p>Category:- <i class="fa-solid fa-venus"></i> female</p>
+            <p>{{ camp.gender }}</p>
+            <p>Price:- ${{ camp.price }}</p>
+            <p>
+              Category:- @if(camp.category=='female'){
+
+              <i class="fa-solid fa-venus"></i> {{ camp.category }}
+              }@else if (camp.category =='male') {
+              <i class="fa-solid fa-venus"></i> {{ camp.category }}
+
+              }@else{
+              {{ camp.category }}
+              }
+            </p>
           </div>
         </div>
       </div>
     </div>
+    }
   </div>
-  }
 </div>
 <!-- 
+{
+    "id": 2,
+    "campName": "Tech Innovators Camp",
+    "address": "456 Silicon Valley, Tech City, USA",
+    "email": "contact@techinnovators.com",
+    "phone": "987-654-3210",
+    "activitiesOffered": "Coding@#Robotics@#3D Printing@#Game Design",
+    "datesAndDurations": "August 1 - August 14",
+    "ageGroup": "10-16 years",
+    "costsAndScholarships": "Standard: $800/week, Limited Scholarships Available",
+    "testimonialsOrReviews": "Great learning experience! - Alex K.@#My child built their first robot. - Jamie R.",
+    "classSchedule": "Morning Coding Workshop@#Afternoon Robotics@#Evening Game Design",
+    "gender": "Co-ed",
+    "price": "$800 per week",
+    "startDate": "2024-08-01",
+    "endDate": "2024-08-14",
+    "capacity": "30 campers",
+    "registrationDeadline": "2024-07-15",
+    "spotsAvailable": "10",
+    "highlights": "Cutting-edge Technology, Hands-on Projects, Expert Mentors",
+    "language": "English",
+    "category": "Technology",
+    "hostedBy": "deep",
+    "campLink": "http://techinnovatorscamp.com"
+}
+    for cards
+    
+    camp name
+    age group
+    gender
+    price
+    category
+
 <div class="card flex justify-content-center">
   <p-paginator
     (onPageChange)="onPageChange($event)"

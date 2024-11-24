@@ -72,6 +72,9 @@
   .backgroundImg {
     height: 45vh;
   }
+  .sr-only{
+    display: none;
+  }
 }
 
 ::ng-deep.p-progress-spinner {

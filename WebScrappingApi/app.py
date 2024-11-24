@@ -13,32 +13,32 @@ def scrape_course_links():
     url = f"{base_url}/courses"
     response = requests.get(url)
 
-if response.status_code == 200:
-    soup = BeautifulSoup(response.text, 'html.parser')
-    course_links = []
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        course_links = []
 
-    # Find all course title sections
-    courses = soup.find_all('h6', class_='card-title')
-    for course in courses:
-        link_tag = course.find('a', href=True)
-        if link_tag:
-            # Append full link
-            full_link = base_url + link_tag['href']
-            course_links.append(full_link)
+        # Find all course title sections
+        courses = soup.find_all('h6', class_='card-title')
+        for course in courses:
+            link_tag = course.find('a', href=True)
+            if link_tag:
+                # Append full link
+                full_link = base_url + link_tag['href']
+                course_links.append(full_link)
 
-    return course_links[:30]
-else:
-    print("Error: Failed to fetch the website data.")
-    return []
+        return course_links[:30]
+    else:
+        print("Error: Failed to fetch the website data.")
+        return []
 
 # Function to scrape course details from each iD Tech course link
 def scrape_course_details(course_url):
-response = requests.get(course_url)
-if response.status_code == 200:
-    soup = BeautifulSoup(response.text, 'html.parser')
-    # Extracting course title
-    title_tag = soup.find('h1', class_='text-undefined title px-2')
-    CampName = title_tag.find('span', class_='undefined').text.strip() if title_tag else "N/A"
+    response = requests.get(course_url)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        # Extracting course title
+        title_tag = soup.find('h1', class_='text-undefined title px-2')
+        CampName = title_tag.find('span', class_='undefined').text.strip() if title_tag else "N/A"
         # Scraping details from the list
         details_list = soup.find('ul', class_='list-unstyled')
 

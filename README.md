@@ -65,6 +65,7 @@ The repository is organized into three main folders:
 - .NET Core  
 - C#  
 - Entity Framework  
+- Hang Fire
 
 ### Data Scraping:
 - Python  

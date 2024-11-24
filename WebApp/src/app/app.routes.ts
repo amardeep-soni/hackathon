@@ -6,8 +6,13 @@ import { AboutComponent } from './pages/about/about.component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HeroComponent,
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
   },
   {
     path: 'camps',

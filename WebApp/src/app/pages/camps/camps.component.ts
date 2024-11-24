@@ -30,10 +30,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './camps.component.css',
 })
 export class CampsComponent implements OnInit {
-  constructor(public _campsService: CampsServiceProxy) {}
+  constructor(public _campsService: CampsServiceProxy) { }
   loading = false;
   camps: Camp[] = [];
-  searchQuery:string=''
+  filteredCamps: Camp[] = [];
+  searchQuery: string = ''
   ngOnInit(): void {
     this.loading = true;
     window.scrollTo(0, 0);
@@ -41,22 +42,17 @@ export class CampsComponent implements OnInit {
       if (data) {
         this.loading = false;
         this.camps = data;
+        this.filteredCamps = this.camps;
         console.log(this.camps);
       }
     });
   }
-  onSearchQueryChange(){
-    this.loading = true;
-    console.log(this.searchQuery);
-
-
-    this._campsService.getAll().subscribe((data) => {
-      if (data) {
-        this.loading = false;
-        this.camps = data.filter((camp) => camp.campName.toLowerCase().includes(this.searchQuery.toLowerCase()));
-        console.log(this.camps);
-      }
-    });
+  onSearchQueryChange() {
+    if (this.searchQuery.length == 0) {
+      this.filteredCamps = [...this.camps]
+    } else {
+      this.filteredCamps = this.camps.filter((camp) => camp.campName.toLowerCase().includes(this.searchQuery.toLowerCase()));
+    }
   }
   router = inject(Router);
   first: number = 0;

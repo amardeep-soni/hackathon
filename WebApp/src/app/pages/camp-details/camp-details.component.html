@@ -152,9 +152,12 @@
   </div>
 </div>
 <!-- testimonials.component.html -->
+@if (camp.testimonialsOrReviews && camp.testimonialsOrReviews.length > 0 &&
+camp.testimonialsOrReviews[0] !== '') {
+
 <div
   class="testimonials-container mt-5"
-  style="background: #3191d1; padding: 2rem 0"
+  style="  padding: 2rem 0"
 >
   <h2 class="text-center">WHAT PEOPLE ARE SAYING ABOUT US</h2>
   <div style="padding: 0 20vw" class="">
@@ -165,18 +168,16 @@
         <div
           class="testimonial-card d-flex align-items-center justify-content-center"
         >
-          <p class="name-role text-center w-75" style=" padding:2rem; ">
+          <p class="name-role text-center w-75" style="padding: 2rem">
             {{ testimonal }}
           </p>
         </div>
       </swiper-slide>
       }
-
     </swiper-container>
   </div>
 </div>
-
-} @else {
+} } @else {
 <div
   class="d-flex align-items-center justify-content-center w-100"
   style="height: 60vh"

@@ -7,8 +7,13 @@ import { CompareCampsComponent } from './compare-camps/compare-camps.component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HeroComponent,
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
   },
   {
     path: 'camps',

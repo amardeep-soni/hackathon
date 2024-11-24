@@ -1,0 +1,112 @@
+/* General Container */
+.compare-camps-container {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading */
+  h2 {
+    color: #000000;
+    margin-bottom: 30px;
+  }
+  
+  /* Card Layout for Dropdowns */
+  .card-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  
+  .card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1 1 300px; /* Flexible for responsiveness */
+    max-width: 350px;
+    text-align: center;
+  }
+  
+  .card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .card p-dropdown {
+    width: 100%;
+  }
+  
+  /* Comparison Card */
+  .comparison-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .comparison-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  div#pn_id_2 {
+    padding: 10px;
+}
+  
+  /* PrimeNG Table Styling */
+  p-table {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  p-table ::ng-deep .p-datatable {
+    overflow: hidden;
+  }
+  
+  p-table ::ng-deep .p-datatable-header {
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  ::ng-deep thead.p-datatable-thead {
+    text-align: center;
+}
+  p-table ::ng-deep .p-datatable-tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  p-table ::ng-deep .p-datatable-tbody tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.2s;
+  }
+  
+  p-table ::ng-deep .p-datatable-tbody td {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  p-table ::ng-deep .p-datatable-header th {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #cccccc;
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .card-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .card {
+      max-width: 100%;
+    }
+  }
+  

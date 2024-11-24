@@ -60,7 +60,6 @@ export class CampsComponent implements OnInit {
   }
   router = inject(Router);
   first: number = 0;
-
   rows: number = 10;
 
   onPageChange(event: any) {

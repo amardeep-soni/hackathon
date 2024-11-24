@@ -1,0 +1,52 @@
+<div class="container">
+  <h2 class="text-center my-2  ">Compare Camps</h2>
+
+  <div class="d-flex justify-content-around mt-5 mb-2">
+    <!-- First Dropdown -->
+    <div>
+      <div class="card flex justify-content-center">
+        <p-dropdown
+          [options]="dropdownOptions"
+          [(ngModel)]="selectedCamp1"
+          placeholder="Select Camp 1"
+          [editable]="true"
+          optionLabel="name"
+          (onChange)="updateTableData()"
+        ></p-dropdown>
+      </div>
+    </div>
+
+    <!-- Second Dropdown -->
+    <div>
+      <div class="card flex justify-content-center">
+        <p-dropdown
+          [options]="dropdownOptions"
+          [(ngModel)]="selectedCamp2"
+          placeholder="Select Camp 2"
+          [editable]="true"
+          optionLabel="name"
+          (onChange)="updateTableData()"
+        ></p-dropdown>
+      </div>
+    </div>
+  </div>
+
+ 
+
+  <p-table [value]="tableData " class="p-5" >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Field</th>
+        <th>Camp 1</th>
+        <th>Camp 2</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td>{{ rowData.field }}</td>
+        <td>{{ rowData.camp1 }}</td>
+        <td>{{ rowData.camp2 }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -12,17 +12,18 @@ namespace WebApi.Repositories
 	{
 		public async Task SaveScrappingData()
 		{
-			var urls = new List<string> { "https://test-flask-six-sigma.vercel.app/api/courses"};  // URL of your Flask API
+			var urls = new List<string> { "idtech", "amplifyrocks", "campolympia", "campnorthstarmaine" };  // URL of your Flask API
 			using (HttpClient client = new HttpClient())
 			{
-				await _dbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Camps");
-				foreach (var url in urls)
+				// Clear Staging Table
+				try
 				{
-
-					try
+					await _dbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE CampStaggings");
+					foreach (var url in urls)
 					{
+
 						// Send GET request to Flask API
-						HttpResponseMessage response = await client.GetAsync(url);
+						HttpResponseMessage response = await client.GetAsync("https://hakathon-flask.vercel.app/api/" + url);
 						response.EnsureSuccessStatusCode();
 
 						// Read the JSON response
@@ -32,14 +33,15 @@ namespace WebApi.Repositories
 
 						if (courses.Count > 0)
 						{
-							// Clear Staging Table
-							await _dbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE CampStaggings");
 
 							// Insert into Staging Table
 							await _dbContext.CampStaggings.AddRangeAsync(courses);
 							await _dbContext.SaveChangesAsync();
-							// Merge Staging Table into Main Table
-							string mergeQuery = @"
+						}
+					}
+
+					// Merge Staging Table into Main Table
+					string mergeQuery = @"
 							SET IDENTITY_INSERT Camps ON;
 
 							MERGE INTO Camps AS Target
@@ -78,13 +80,11 @@ namespace WebApi.Repositories
 
 							SET IDENTITY_INSERT Camps OFF;
 							";
-							await _dbContext.Database.ExecuteSqlRawAsync(mergeQuery);
-						}
-					}
-					catch
-					{
-						continue;
-					}
+					await _dbContext.Database.ExecuteSqlRawAsync(mergeQuery);
+				}
+				catch(Exception ex) 
+				{
+					throw new Exception(ex.Message);
 				}
 			}
 		}

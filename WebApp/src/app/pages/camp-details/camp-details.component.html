@@ -108,7 +108,7 @@
             </div>
             <div class="time-details">
               <h6>Start Date</h6>
-              <p class='text-capitalize'>{{ camp.startDate }}</p>
+              <p class="text-capitalize">{{ camp.startDate }}</p>
             </div>
           </div>
 
@@ -122,7 +122,7 @@
             </div>
             <div class="time-details">
               <h6>End Date</h6>
-              <p class='text-capitalize'>{{ camp.endDate }}</p>
+              <p class="text-capitalize">{{ camp.endDate }}</p>
             </div>
           </div>
         </div>
@@ -149,6 +149,30 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+<!-- testimonials.component.html -->
+<div
+  class="testimonials-container mt-5"
+  style="background: #3191d1; padding: 2rem 0"
+>
+  <h2 class="text-center">WHAT PEOPLE ARE SAYING ABOUT US</h2>
+  <div style="padding: 0 20vw" class="">
+    <swiper-container pagination="true" pagination-dynamic-bullets="true">
+      <!-- Loop through testimonials and create a slide for each -->
+      @for (testimonal of camp.testimonialsOrReviews; track $index) {
+      <swiper-slide>
+        <div
+          class="testimonial-card d-flex align-items-center justify-content-center"
+        >
+          <p class="name-role text-center w-75" style=" padding:2rem; ">
+            {{ testimonal }}
+          </p>
+        </div>
+      </swiper-slide>
+      }
+
+    </swiper-container>
   </div>
 </div>
 

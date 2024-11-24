@@ -206,7 +206,15 @@
   -o-transition: .3s linear;
   position: relative;
 }
-
+::ng-deep .swiper-button-next,
+::ng-deep .swiper-button-prev {
+  color: #3498db !important;
+  font-size: 2rem !important;
+  opacity: 0.8 !important;
+}
+.testimonials-container svg{
+  color: white !important;
+}
 .contactInfo::after {
   content: '';
   position: absolute;

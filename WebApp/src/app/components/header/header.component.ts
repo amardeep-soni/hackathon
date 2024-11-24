@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
 export class HeaderComponent {
   isDarkMode = false;
   isMenuOpen = false;
-
+router = inject(Router)
   toggleTheme() {
     this.isDarkMode = !this.isDarkMode;
     const body = document.body;
@@ -22,5 +22,8 @@ export class HeaderComponent {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+  navigateToHomePage(){
+    this.router.navigate(['/']);  // replace with your actual route
   }
 }

@@ -28,8 +28,10 @@ export class CampDetailsComponent {
       if(data){
 this.loading = false
         this.camp = data;
+        console.log(data);
       }
-      console.log(data);
+
+
     });
     // this.gsapAnimation();
     // this.camp = new CampsDto({

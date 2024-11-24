@@ -177,3 +177,115 @@
   justify-content: center;
   width: 60% !important;
 }
+/* Mobile devices */
+@media (max-width: 480px) {
+  .content{
+    padding: 2rem;
+  }
+  .content h1{
+    font-size: 7.5vw;
+    text-align: center;
+    line-height: 33px;
+    font-weight: 600;
+  }
+  .content p{
+    font-size: 1rem;
+  }
+  .choose  {
+    flex-direction: column;
+    padding: 2rem;
+}
+.about{
+  flex-direction: column;
+        padding: 2rem !important;
+}
+.about > div{
+  padding: 0 !important;
+  width: 100%;
+}
+.about button{
+  width: 40vw !important;
+}
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Styles for tablets */
+}
+
+/* Laptops & Desktops */
+@media (min-width: 1280px) {
+  /* Styles for larger screens */
+}
+
+/* Default styles for large screens (desktops, laptops) */
+.serviceSection .cards {
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+}
+
+.card {
+  padding: 30px 20px;
+  width: 20rem;
+  text-align: center;
+}
+
+.card img {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+}
+
+@media (max-width: 1200px) {
+  .serviceSection .cards {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .serviceSection .cards {
+
+    flex-direction: row !important;
+    gap: 2rem;
+    flex-direction: column; /* Stack cards vertically on medium screens */
+  }
+
+  .card {
+    width: 90%; /* Make card width responsive */
+  }
+} 
+
+@media (max-width: 768px) {
+
+  .serviceSection .cards {
+    gap: 1rem;
+    flex-direction: column; /* Stack cards vertically on smaller screens */
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .heading h1 {
+    font-size: 2rem; /* Make heading smaller on small screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .serviceSection{
+    padding: 2rem ;
+  }
+  .serviceSection .cards {
+    gap: 1rem;
+    flex-direction: column; /* Stack cards vertically on extra small screens */
+  }
+
+  .card {
+    width: 100% !important; /* Full width for cards on very small screens */
+  }
+
+  .heading h1 {
+    font-size: 1.8rem; /* Smaller heading for extra small screens */
+  }
+}

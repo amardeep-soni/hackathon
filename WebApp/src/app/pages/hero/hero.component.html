@@ -29,7 +29,7 @@
       />
       <div class="overlayContainer"></div>
     </swiper-slide>
-    <swiper-slide class="slide2">
+    <!-- <swiper-slide class="slide2">
       <div class="content">
         <h1>Challange and new relationships</h1>
         <p class="text-center">
@@ -71,14 +71,9 @@
       />
 
       <div class="overlayContainer"></div>
-    </swiper-slide>
+    </swiper-slide> -->
   </swiper-container>
 </div>
-<!-- <div class="col d-flex align-items-center justify-content-center">
-  <div class="row-3">
-    <button class="btn btn-primary" (click)="onViewMore()">Veiw more</button>
-  </div>
-</div> -->
 <div class="choose">
   <div
     class="row-25 d-flex justify-content-center align-item-center flex-column"
@@ -91,7 +86,7 @@
   <div class="row-75 right"></div>
 </div>
 
-<div class="col p-5 d-flex justify-content-center gap-5">
+<div class=" about col p-5 d-flex justify-content-center gap-5 flex-sm-column flex-md-row">
   <div class="row-5 d-flex flex-column justify-content-center gap-3 px-5">
     <h1
       style="
@@ -122,13 +117,13 @@
 
     <button
       class="btn btn-primary"
-      style="width: 10vw"
+      style="width: 10rem;"
       (click)="rediredToAbout()"
     >
       WHAT WE DO
     </button>
   </div>
-  <div class="col-6 px-5">
+  <div class="col-6 col-sm-12 col-md-6 px-5">
     <div class="img w-100 h-100">
       <img
         src="https://campwilderness.co.uk/wp-content/uploads/2024/08/PC2_3357-aspect-ratio-1152-1440-1152x1440-1.jpg"
@@ -138,120 +133,31 @@
     </div>
   </div>
 </div>
-
 <div class="serviceSection">
   <div class="heading d-flex justify-content-center align-items-center">
     <h1>Service</h1>
   </div>
-  <div
-    class="cards d-flex gap-5 justify-content-center"
-    style="padding: 3rem 0"
-  >
-    <div
-      class="card d-flex flex-column align-items-center justify-content-center gap-3"
-      style="padding: 30px 20px; width: 20rem; text-align: center"
-    >
-      <img
-        src="https://images.cdn-files-a.com/ready_uploads/media/9355898/400_6377759e0a9e0.jpg"
-        alt=""
-        style="border-radius: 50%; height: 150px; width: 150px"
-      />
+  <div class="cards d-flex flex-wrap gap-5 justify-content-center" style="padding: 3rem 0">
+    <!-- First Card -->
+    <div class="card d-flex flex-column align-items-center justify-content-center gap-3" style="padding: 30px 20px; width: 20rem; text-align: center">
+      <img src="https://images.cdn-files-a.com/ready_uploads/media/9355898/400_6377759e0a9e0.jpg" alt="" style="border-radius: 50%; height: 150px; width: 150px" />
       <h4>Time-Saver</h4>
-      <p>
-        Save time by accessing all necessary information without jumping from
-        one website to another.
-      </p>
+      <p>Save time by accessing all necessary information without jumping from one website to another.</p>
     </div>
-    <div
-      class="card d-flex flex-column align-items-center justify-content-center gap-3"
-      style="padding: 30px 20px; width: 20rem; text-align: center"
-    >
-      <img
-        src="https://images.cdn-files-a.com/ready_uploads/media/3021014/400_5e2c2a0f41d2e.jpg"
-        alt=""
-        style="border-radius: 50%; height: 150px; width: 150px"
-      />
+
+    <!-- Second Card -->
+    <div class="card d-flex flex-column align-items-center justify-content-center gap-3" style="padding: 30px 20px; width: 20rem; text-align: center">
+      <img src="https://images.cdn-files-a.com/ready_uploads/media/3021014/400_5e2c2a0f41d2e.jpg" alt="" style="border-radius: 50%; height: 150px; width: 150px" />
       <h4>Easy Comparison</h4>
-      <p>
-        Easily compare different summer camps based on your criteria to find the perfect fit.
-      </p>
+      <p>Easily compare different summer camps based on your criteria to find the perfect fit.</p>
     </div>
-    <div
-      class="card d-flex flex-column align-items-center justify-content-center gap-3"
-      style="padding: 30px 20px; width: 20rem; text-align: center"
-    >
-      <img
-        src="https://images.cdn-files-a.com/ready_uploads/media/6562001/400_5fc6b438c393d.jpg"
-        alt=""
-        style="border-radius: 50%; height: 150px; width: 150px"
-      />
+
+    <!-- Third Card -->
+    <div class="card d-flex flex-column align-items-center justify-content-center gap-3" style="padding: 30px 20px; width: 20rem; text-align: center">
+      <img src="https://images.cdn-files-a.com/ready_uploads/media/6562001/400_5fc6b438c393d.jpg" alt="" style="border-radius: 50%; height: 150px; width: 150px" />
       <h4>Comprehensive Listings</h4>
-      <p>
-        We provide a thorough list of summer camps from various sources, all in one place.
-      </p>
+      <p>We provide a thorough list of summer camps from various sources, all in one place.</p>
     </div>
   </div>
 </div>
-<!--
-<div class="testimoinials">
-  <div class="heading d-flex justify-content-center align-items-center">
-    <h1>Testimonials</h1>
-  </div>
-  <div
-    class="testimonialsCards d-flex justify-content-center align-items-center"
-  >
-    <swiper-container pagination="true" navigation="true">
-      <swiper-slide>
-        <div class="profile">
-          <img
-            src="https://images.cdn-files-a.com/ready_uploads/media/4173101/400_5e63a6c6b28f8.jpg"
-            alt=""
-            style="border-radius: 50%; height: 150px; width: 150px"
-          />
-        </div>
-        <div class="details">
-          <h3>John Doe</h3>
-          <p>
-            "Camp Wilderness has been a great resource for my family. They have
-            helped me find the perfect camp for our children and we are all very
-            happy with the result."
-          </p>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="profile">
-          <img
-            src="https://images.cdn-files-a.com/ready_uploads/media/4173101/400_5e63a6c6b28f8.jpg"
-            alt=""
-            style="border-radius: 50%; height: 150px; width: 150px"
-          />
-        </div>
-        <div class="details">
-          <h3>John Doe</h3>
-          <p>
-            "Camp Wilderness has been a great resource for my family. They have
-            helped me find the perfect camp for our children and we are all very
-            happy with the result."
-          </p>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="profile">
-          <img
-            src="https://images.cdn-files-a.com/ready_uploads/media/4173101/400_5e63a6c6b28f8.jpg"
-            alt=""
-            style="border-radius: 50%; height: 150px; width: 150px"
-          />
-        </div>
-        <div class="details">
-          <h3>John Doe</h3>
-          <p>
-            "Camp Wilderness has been a great resource for my family. They have
-            helped me find the perfect camp for our children and we are all very
-            happy with the result."
-          </p>
-        </div>
-      </swiper-slide>
-    </swiper-container>
-  </div>
-</div> -->
+

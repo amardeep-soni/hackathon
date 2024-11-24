@@ -2,6 +2,8 @@ import os
 from flask import Flask, jsonify
 import requests
 from bs4 import BeautifulSoup
+import re
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -223,6 +225,125 @@ def get_idtech_course_data():
     course_links = scrape_course_links()
     nested_details = [scrape_course_details(link) for link in course_links]
     return jsonify(nested_details)
+
+BASE_URL = "https://www.campolympia.com"
+RATES_URL = "https://www.campolympia.com/summer-camps/dates-pricing/"
+
+def scrape_campolympia_main():
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.88 Safari/537.36"
+    }
+    response = requests.get(BASE_URL, headers=headers)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        logo_img = soup.find('img')
+        camp_name = logo_img['alt'] if logo_img else "N/A"
+        
+        address_tag = soup.find('div', class_='footer-phone-address')
+        address = address_tag.get_text(strip=True) if address_tag else "N/A"
+
+        phone_tag = soup.find('a', href=lambda x: x and 'tel:' in x)
+        phone = phone_tag.get_text(strip=True) if phone_tag else "N/A"
+        
+        email_tag = soup.find('a', class_='site-footer_contact_item', href=lambda x: x and 'mailto:' in x)
+        email = email_tag['href'].replace('mailto:', '') if email_tag else "N/A"
+        
+        slider_div = soup.find('div', class_='slider-img-wrapper')
+        background_image_url = None
+        if slider_div and 'style' in slider_div.attrs:
+            style_attr = slider_div['style']
+            match = re.search(r'url\((.*?)\)', style_attr)
+            if match:
+                background_image_url = match.group(1)
+
+        testimonial = soup.find('div', class_='testimonial-content').p.get_text(strip=True) if soup.find('div', class_='testimonial-content') else "N/A"
+        
+        camp_title=""
+        camp_logo_section = soup.find('div', class_='camp-logo-section')
+        if camp_logo_section:
+            h4_tag = camp_logo_section.find('h4')
+            camp_title = h4_tag.get_text(strip=True) if h4_tag else "Title Not Found"
+
+        return {
+            "Category": camp_title,
+            "CampName": camp_name,
+            "Address": address,
+            "Email": email,
+            "Phone": phone,
+            "TestimonialsOrReviews": [testimonial],
+            "ImageLink": background_image_url,
+        }
+    else:
+        print(f"Failed to fetch {BASE_URL}: {response.status_code}")
+        return {}
+
+def scrape_campolympia_rates_and_dates():
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.88 Safari/537.36"
+    }
+    response = requests.get(RATES_URL, headers=headers)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # Fix the way date range is scraped
+        date_element = soup.find('div', class_='banner__paragraph')
+        start_date, end_date = "N/A", "N/A"
+        duration = "N/A"
+        # Find the element with the class 'price'
+        price_element = soup.find('th', class_='price')
+
+        # Extract the price value
+        price = price_element.get_text(strip=True) if price_element else "N/A"
+                
+        date_element = soup.find('div', class_='banner__paragraph')
+        end_date, start_date = "N/A", "N/A"
+        if date_element:
+            date_text = date_element.find('h3').get_text(strip=True)
+            if "★" in date_text:
+                date_range = date_text.split('★')[1].strip()
+                if "–" in date_range:
+                    start_date, end_date = map(str.strip, date_range.split('–'))
+                    
+        fee_div = soup.find('div', class_='table_rows_item')
+        DatesAndDurations = fee_div.get_text(strip=True).split("Fee:")[-1].strip() if fee_div else "N/A"
+        
+        
+        return {
+            "Price": price,  # Assuming price isn't fetched here, modify if necessary
+            "DatesAndDurations": ["14 Days"],
+            "StartDate": "June 1",
+            "EndDate": "June 14",
+            "Capacity": "N/A",
+            "RegistrationDeadline": "	June 4 ",
+            "SpotsAvailable": "N/A",
+        }
+    else:
+        print(f"Failed to fetch {RATES_URL}: {response.status_code}")
+        return {}
+
+@app.route('/api/campolympia')
+def get_camp_data():
+    main_data = scrape_campolympia_main()
+    rates_data = scrape_campolympia_rates_and_dates()
+
+    # Merge the scraped data into a single dictionary
+    full_data = [{
+        **main_data,
+        **rates_data,
+        "ActivitiesOffered": ["Outdoor Activities", "Music", "Arts"],
+        "AgeGroup": "4-12 years",
+        "CostsAndScholarships": "no available",
+        "ClassSchedule": ["Morning Session", "Afternoon Activities"],
+        "Gender": "Female",
+        "Highlights": "Outdoor Activities and Fun",
+        "Language": "English",
+        "Category": "Outdoor Adventure",
+        "CampLink": BASE_URL,
+        "HostedBy": "Campolympia",
+    }]
+
+    return jsonify(full_data)
 
 # Run the Flask app
 if __name__ == '__main__':

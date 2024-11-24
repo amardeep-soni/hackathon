@@ -132,11 +132,20 @@ def scrape_course_details(course_url):
             "Error": "Failed to fetch course details."
         }
 
+# Flask route for iD Tech course data
+@app.route('/api/idtech', methods=['GET'])
+def get_idtech_course_data():
+    course_links = scrape_course_links()
+    nested_details = [scrape_course_details(link) for link in course_links]
+    return jsonify(nested_details)
+
+
+
 # Amplify Rocks scraping functions
-BASE_URL = "https://amplifyrocks.org/"
-RATES_URL = "https://amplifyrocks.org/rates-dates/"
 
 def scrape_amplify_main():
+    BASE_URL = "https://amplifyrocks.org/"
+    RATES_URL = "https://amplifyrocks.org/rates-dates/"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.88 Safari/537.36"
     }
@@ -154,6 +163,8 @@ def scrape_amplify_main():
         image_tag = soup.find('div', class_='image-background').find('img') if soup.find('div', class_='image-background') else None
         image_url = image_tag['src'] if image_tag else "Image URL not found",
         highlights = soup.find('div', class_='tabcont__paragraph').get_text(strip=True) if soup.find('div', class_='tabcont__paragraph') else "N/A"
+        print(image_tag)
+        print(image_url)
 
         return {
             "CampName": camp_name,
@@ -168,7 +179,9 @@ def scrape_amplify_main():
     else:
         return {}
 
-def scrape_rates_and_dates():
+def scrape_amplify_rates_and_dates():
+    BASE_URL = "https://amplifyrocks.org/"
+    RATES_URL = "https://amplifyrocks.org/rates-dates/"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.88 Safari/537.36"
     }
@@ -201,8 +214,9 @@ def scrape_rates_and_dates():
 # Flask route for Amplify Rocks data
 @app.route('/api/amplifyrocks')
 def get_amplify_rocks_data():
+    BASE_URL = "https://amplifyrocks.org/"
     main_data = scrape_amplify_main()
-    rates_data = scrape_rates_and_dates()
+    rates_data = scrape_amplify_rates_and_dates()
 
     full_data = [{
         **main_data,
@@ -219,17 +233,10 @@ def get_amplify_rocks_data():
     }]
     return jsonify(full_data)
 
-# Flask route for iD Tech course data
-@app.route('/api/idtech', methods=['GET'])
-def get_idtech_course_data():
-    course_links = scrape_course_links()
-    nested_details = [scrape_course_details(link) for link in course_links]
-    return jsonify(nested_details)
-
-BASE_URL = "https://www.campolympia.com"
-RATES_URL = "https://www.campolympia.com/summer-camps/dates-pricing/"
 
 def scrape_campolympia_main():
+    BASE_URL = "https://www.campolympia.com"
+    RATES_URL = "https://www.campolympia.com/summer-camps/dates-pricing/"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.88 Safari/537.36"
     }
@@ -279,6 +286,8 @@ def scrape_campolympia_main():
         return {}
 
 def scrape_campolympia_rates_and_dates():
+    BASE_URL = "https://www.campolympia.com"
+    RATES_URL = "https://www.campolympia.com/summer-camps/dates-pricing/"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.88 Safari/537.36"
     }
@@ -324,6 +333,7 @@ def scrape_campolympia_rates_and_dates():
 
 @app.route('/api/campolympia')
 def get_camp_data():
+    BASE_URL = "https://www.campolympia.com"
     main_data = scrape_campolympia_main()
     rates_data = scrape_campolympia_rates_and_dates()
 

@@ -229,7 +229,7 @@ def get_idtech_course_data():
 BASE_URL = "https://www.campolympia.com"
 RATES_URL = "https://www.campolympia.com/summer-camps/dates-pricing/"
 
-def scrape_amplify_main():
+def scrape_campolympia_main():
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.88 Safari/537.36"
     }
@@ -278,7 +278,7 @@ def scrape_amplify_main():
         print(f"Failed to fetch {BASE_URL}: {response.status_code}")
         return {}
 
-def scrape_rates_and_dates():
+def scrape_campolympia_rates_and_dates():
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.88 Safari/537.36"
     }
@@ -322,10 +322,10 @@ def scrape_rates_and_dates():
         print(f"Failed to fetch {RATES_URL}: {response.status_code}")
         return {}
 
-@app.route('/api/get_camp_data')
+@app.route('/api/campolympia')
 def get_camp_data():
-    main_data = scrape_amplify_main()
-    rates_data = scrape_rates_and_dates()
+    main_data = scrape_campolympia_main()
+    rates_data = scrape_campolympia_rates_and_dates()
 
     # Merge the scraped data into a single dictionary
     full_data = [{

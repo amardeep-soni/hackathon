@@ -26,8 +26,7 @@ def scrape_course_links():
                 full_link = base_url + link_tag['href']
                 course_links.append(full_link)
 
-        # Return only the first 10 links
-        return course_links[:10]
+        return course_links
     else:
         print("Error: Failed to fetch the website data.")
         return []

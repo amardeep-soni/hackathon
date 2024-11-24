@@ -1,7 +1,21 @@
 <div class="backgroundImg"></div>
 
-<div class="text-center text-capitalize pt-4">
+<div class="text-center text-capitalize pt-4 d-flex justify-content-between px-5">
   <h1>Get all the camps</h1>
+  <div class="search d-flex gap-3">
+    <form class="form-inline my-2 my-lg-0 d-flex py-3 gap-2">
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search your camps..."
+        aria-label="Search"
+        style="outline: none;"
+        name="searc"
+        [(ngModel)]="searchQuery"
+        (input)="onSearchQueryChange()"
+      />
+    </form>
+  </div>
 </div>
 
 <div class="container-fluid">
@@ -11,6 +25,8 @@
     class="row"
     style="margin-left: 0 !important; margin-right: 0 !important"
   >
+  @if(camps.length){
+
     <!-- Loop through camps and create a responsive card layout -->
     @for (camp of camps; track camp.id){
     <div
@@ -25,9 +41,7 @@
           class="card-img-top rounded-4"
           [src]="camp.imageLink"
           alt="Card image cap"
-          style="
-          height: 12rem;
-          object-fit: cover;"
+          style="height: 12rem; object-fit: cover"
         />
         <div class="card-body">
           <div class="col">
@@ -55,11 +69,20 @@
       </div>
     </div>
     }
+  }@else {
+    <div class="d-flex justify-content-center align-items-center w-100" style="height: 70vh;">
+      <h1>No Related Camp Found</h1>
+    </div>
+  }
   </div>
 
-}@else{
-  <div class=" d-flex align-items-center justify-content-center w-100" style="height: 60vh;" role="status">
+  }@else{
+  <div
+    class="d-flex align-items-center justify-content-center w-100"
+    style="height: 60vh"
+    role="status"
+  >
     <p-progressSpinner ariaLabel="loading" />
   </div>
-}
+  }
 </div>

@@ -9,7 +9,6 @@
   height: 150px !important;
 }
 
-
 .upper {
   display: flex;
   gap: 32px;
@@ -65,15 +64,17 @@
   width: 100%;
 }
 
-.aboutCamp>div:nth-child(1) {
+.aboutCamp > div:nth-child(1) {
   width: 50%;
 }
 
-.aboutCamp>div:nth-child(2) {
+.aboutCamp > div:nth-child(2) {
   width: 50%;
 }
 
-.activities, .classSchedule, .datesDuration {
+.activities,
+.classSchedule,
+.datesDuration {
   width: 50%;
 }
 
@@ -83,7 +84,6 @@
   font-weight: 600;
   margin-bottom: 24px;
 }
-
 
 .activities h3,
 .classSchedule h3,
@@ -135,7 +135,6 @@
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-
 }
 
 .time-card:hover {
@@ -192,18 +191,19 @@
   padding: 0 8px;
 }
 
-.contactInfo {    width: 85%;
+.contactInfo {
+  width: 85%;
   background-color: #f8f9fa;
   border-radius: 12px;
   padding: 10px;
   padding-left: 25px;
   margin-bottom: 32px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: .3s linear;
-  -webkit-transition: .3s linear;
-  -moz-transition: .3s linear;
-  -ms-transition: .3s linear;
-  -o-transition: .3s linear;
+  transition: 0.3s linear;
+  -webkit-transition: 0.3s linear;
+  -moz-transition: 0.3s linear;
+  -ms-transition: 0.3s linear;
+  -o-transition: 0.3s linear;
   position: relative;
 }
 ::ng-deep .swiper-button-next,
@@ -212,11 +212,11 @@
   font-size: 2rem !important;
   opacity: 0.8 !important;
 }
-.testimonials-container svg{
+.testimonials-container svg {
   color: white !important;
 }
 .contactInfo::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
@@ -226,13 +226,13 @@
   background-color: #2d89c6;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
-  transition: .3s linear;
-  -webkit-transition: .3s linear;
-  -moz-transition: .3s linear;
-  -ms-transition: .3s linear;
-  -o-transition: .3s linear;
+  transition: 0.3s linear;
+  -webkit-transition: 0.3s linear;
+  -moz-transition: 0.3s linear;
+  -ms-transition: 0.3s linear;
+  -o-transition: 0.3s linear;
 }
-.contactInfo:hover{
+.contactInfo:hover {
   transform: translateY(-5px);
   -webkit-transform: translateY(-5px);
   -moz-transform: translateY(-5px);
@@ -245,11 +245,11 @@
 }
 
 .visitBtn {
-  transition: .3s linear;
-  -webkit-transition: .3s linear;
-  -moz-transition: .3s linear;
-  -ms-transition: .3s linear;
-  -o-transition: .3s linear;
+  transition: 0.3s linear;
+  -webkit-transition: 0.3s linear;
+  -moz-transition: 0.3s linear;
+  -ms-transition: 0.3s linear;
+  -o-transition: 0.3s linear;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -371,5 +371,39 @@
 
   .contact-details span::after {
     display: none;
+  }
+  .aboutCamp {
+    flex-direction: column;
+  }
+  .aboutCamp > div:nth-child(1) {
+    width: 100% !important;
+  }
+  .activities,
+  .classSchedule,
+  .datesDuration {
+    width: 100%;
+  }
+  .aboutCamp > div:nth-child(2) {
+    /* width: 50%; */
+    width: 100%;
+  }
+  .contactInfo {
+    width: 100%;
+  }
+}
+@media (max-width: 550px) {
+  .time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+  .startEnd {
+    width: 100%;
+    justify-content: center;
+  }
+  .time-divider{
+    rotate: 90deg;
   }
 }

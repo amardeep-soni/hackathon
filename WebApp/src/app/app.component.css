@@ -20,4 +20,5 @@
 
 .scroll-to-top-icon i {
   pointer-events: none; /* Ensures the icon does not interfere with the click event */
+  color: white;
 }

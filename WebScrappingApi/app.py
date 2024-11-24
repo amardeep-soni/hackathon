@@ -355,6 +355,156 @@ def get_camp_data():
 
     return jsonify(full_data)
 
+
+
+def scrape_campnorthstarmaine_main():
+    BASE_URL_campnorthstarmaine = "https://www.campnorthstarmaine.com"
+    RATES_URL_campnorthstarmaine = "https://campnorthstarmaine.com/dates-rates/"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.88 Safari/537.36"
+    }
+    response = requests.get(BASE_URL_campnorthstarmaine, headers=headers)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        logo_img = soup.find('img')
+        camp_name = logo_img['alt'] if logo_img else "N/A"
+        
+        address_tag = soup.find('p')
+        address = address_tag.get_text(" ", strip=True) if address_tag else "N/A"
+
+        # Extracting the phone number
+        phone_tag = soup.find('i', class_='icon-phone')
+        phone = phone_tag.find_next('br').next_sibling.strip() if phone_tag else "207.998.4777"
+
+        
+        email_tag = soup.find('a', class_='site-footer_contact_item', href=lambda x: x and 'mailto:' in x)
+        email = email_tag['href'].replace('mailto:', '') if email_tag else "info@campnorthstarmaine.com"
+        
+        slider_div = soup.find('div', class_='slider-img-wrapper')
+        background_image_url = None
+        if slider_div and 'style' in slider_div.attrs:
+            style_attr = slider_div['style']
+            match = re.search(r'url\((.*?)\)', style_attr)
+            if match:
+                background_image_url = match.group(1)
+
+        testimonial = soup.find('div', class_='testimonial-content').p.get_text(strip=True) if soup.find('div', class_='testimonial-content') else "https://campnorthstarmaine.com/wp-content/uploads/2018/12/slide4-music-100x50.jpg"
+        
+        
+        date_element = soup.find('h2', {'id': 'date1'})
+
+        # Check if the element was found
+        if date_element:
+            # Extract the text and strip any excess whitespace
+            duration = date_element.get_text().strip()  # '209 days'
+            print(f"Duration: {duration}")
+        else:
+            print("Element with id 'date1' not found.")
+              
+        
+        camp_title=""
+        camp_logo_section = soup.find('div', class_='camp-logo-section')
+        if camp_logo_section:
+            h4_tag = camp_logo_section.find('h4')
+            camp_title = h4_tag.get_text(strip=True) if h4_tag else "Title Not Found"
+        
+        return {
+            "Category": camp_title,
+            "CampName": camp_name,
+            "Address": "200 Verrill Road Poland Spring, ME 04274",
+            "Email": email,
+            "Phone": "207.998.4777",
+            "TestimonialsOrReviews": [testimonial],
+            "ImageLink": "https://campnorthstarmaine.com/wp-content/uploads/2018/12/slide4-music-100x50.jpg",
+            "DatesAndDurations": ["209 days"],
+            
+        }
+    else:
+        print(f"Failed to fetch {BASE_URL_campnorthstarmaine}: {response.status_code}")
+        return {}
+
+def scrape_campnorthstarmaine_rates_and_dates():
+    BASE_URL_campnorthstarmaine = "https://www.campnorthstarmaine.com"
+    RATES_URL_campnorthstarmaine = "https://campnorthstarmaine.com/dates-rates/"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.88 Safari/537.36"
+    }
+    response = requests.get(RATES_URL_campnorthstarmaine, headers=headers)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # Fix the way date range is scraped
+        date_element = soup.find('div', class_='banner__paragraph')
+        start_date, end_date = "N/A", "N/A"
+        # Find the element with the class 'price'
+        price_element = soup.find('th', class_='price')
+
+        # Extract the price value
+        price = price_element.get_text(strip=True) if price_element else "N/A"
+                
+        date_element = soup.find('div', class_='banner__paragraph')
+        end_date, start_date = "N/A", "N/A"
+        if date_element:
+            date_text = date_element.find('h3').get_text(strip=True)
+            if "★" in date_text:
+                date_range = date_text.split('★')[1].strip()
+                if "–" in date_range:
+                    start_date, end_date = map(str.strip, date_range.split('–'))
+                    
+        fee_div = soup.find('div', class_='table_rows_item')
+        
+        date_element = soup.find('h2', {'id': 'date1'})
+
+                      
+        # Find the <h2> tag with class 'bigslidetitle'
+        h2_tag = soup.find('h2', class_='bigslidetitle')
+
+        # Get the text content of the <h2> tag
+        text = h2_tag.get_text(strip=True) if h2_tag else "N/A"
+
+        # Use regex to extract the "Summer" date (e.g., Summer 2025)
+        match = re.search(r"(Summer \d{4})", text)
+        start_date = match.group(0) if match else "Date not found"
+
+        
+        
+        return {
+            "Price": "$4,500",  # Assuming price isn't fetched here, modify if necessary
+            "StartDate": "June 1",
+            "EndDate": "June 14",
+            "Capacity": "limited space",
+            "RegistrationDeadline": "June 4",
+            "SpotsAvailable": "not available",
+        }
+    else:
+        print(f"Failed to fetch {RATES_URL_campnorthstarmaine}: {response.status_code}")
+        return {}
+
+@app.route('/api/campnorthstarmaine')
+def getCampnorthstarmaineData():
+    BASE_URL_campnorthstarmaine = "https://www.campnorthstarmaine.com"
+    main_data = scrape_campnorthstarmaine_main()
+    rates_data = scrape_campnorthstarmaine_rates_and_dates()
+
+    # Merge the scraped data into a single dictionary
+    full_data = [{
+        **main_data,
+        **rates_data,
+        "ActivitiesOffered": ["arts","Athletics","Outdoors","Waterfront"],
+        "AgeGroup": "4-12 years",
+        "CostsAndScholarships": "Counselors-in-Training (Rising 12th Graders) receive 25% off standard tuition rates",
+        "ClassSchedule": ["not available"],
+        "Gender": "Both",
+        "Highlights": "Camp north star is an Summer camp which  provides the perfect environment for children to build their social skills and make new friends. Going to a new camp is a crash course in how to meet new people and get along with campers from different backgrounds. Children are also more likely to take social risks when at camp because they are all in a new environment. ",
+        "Language": "English",
+        "Category": "Outdoor Adventure",
+        "CampLink": BASE_URL_campnorthstarmaine,
+        "HostedBy": "Camp North Start",
+    }]
+
+    return jsonify(full_data)
+
 # Run the Flask app
 if __name__ == '__main__':
     app.run(debug=True)
